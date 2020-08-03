@@ -1,0 +1,36 @@
+{
+    "products": [
+        {
+            "_id": "abc",
+            "name": "Xperia",
+            "price": "545",
+            "manufacturer": {
+                "_id": "deee",
+                "name": "Sony"
+            },
+            "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+            "description": "lorem lorem"
+        },
+        {
+            "_id": "abc",
+            "name": "Xperia",
+            "price": "545",
+            "manufacturer": {
+                "_id": "deee",
+                "name": "Sony"
+            },
+            "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+            "description": "lorem lorem"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}

@@ -1,6 +1,7 @@
 <template>
   <div>
     Home
+    {{$store.state.cart}}
   </div>
 </template>
 
