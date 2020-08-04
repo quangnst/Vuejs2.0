@@ -14,7 +14,7 @@ import {
     ALL_PRODUCTS_SUCCESS,
     ALL_MANUFACTURERS,
     ALL_MANUFACTURERS_SUCCESS
-} from './mutation-types'
+} from '../mutation-types'
 
 export const productActions = {
     allProducts({commit}) {
@@ -36,7 +36,7 @@ export const productActions = {
         })
     },
     updateProduct({commit, payload}) {
-        commit(ADD_PRODUCT_SUCCESS)
+        commit(UPDATE_PRODUCT)
         axios.put(`${API_BASE}/products/${payload._id}`, payload).then(response => {
             commit(UPDATE_PRODUCT_SUCCESS, response.data)
         })

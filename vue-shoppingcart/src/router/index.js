@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/Home';
-import Cart from '@/components/Cart';
+import Home from '@/pages/Home';
+import Cart from '@/pages/Cart';
 
 // Admin
 import Index from '@/pages/admin/Index';
