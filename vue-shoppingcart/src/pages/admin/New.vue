@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import ProductFrom from '@/components/products/ProductForm.vue'
+  import ProductFrom from '@/components/product/ProductForm.vue'
   export default {
     data () {
       return {

@@ -66,7 +66,7 @@ export const cartMutations = {
     },
     [REMOVE_FROM_CART]: (state, payload) => {
         const index = state.cart.findIndex(p => p._id === payload)
-        state.cart.splice(index, index)
+        state.cart.splice(index, 1)
     }
 }
 

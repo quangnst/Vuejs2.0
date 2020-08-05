@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <template v-for="product in products">
-            <product-item :product="product" :key="product._id"></product-item>
+            <product-item :product="product" :key="product.id"></product-item>
           </template>
         </div>
       </div>
