@@ -1,36 +1,44 @@
 {
-    "products": [
-        {
-            "_id": "1",
-            "name": "Xperia",
-            "price": "545",
-            "manufacturer": {
-                "_id": "1a",
-                "name": "Sony"
-            },
-            "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
-            "description": "lorem lorem"
-        },
-        {
-            "_id": "2",
-            "name": "Xperia",
-            "price": "545",
-            "manufacturer": {
-                "_id": "2a",
-                "name": "Sony"
-            },
-            "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
-            "description": "lorem lorem"
-        }
-    ],
-    "comments": [
-        {
-            "id": 1,
-            "body": "some comment",
-            "postId": 1
-        }
-    ],
-    "profile": {
-        "name": "typicode"
+  "products": [
+    {
+      "id": "1",
+      "name": "Iphone X",
+      "price": "1000",
+      "manufacturer": "222",
+      "image": "https://ctmobile.vn/upload/iphone 11 purple-2.png",
+      "description": "Iphone 11 64Gb"
+    },
+    {
+      "id": "2",
+      "name": "Xperia",
+      "price": "545",
+      "manufacturer": {
+        "id": "1234",
+        "name": "Apple"
+      },
+      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+      "description": "lorem lorem"
+    },
+    {
+      "name": "Iphone Xmas",
+      "price": "2000",
+      "manufacturer": {
+        "id": "1234",
+        "name": "Apple"
+      },
+      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+      "description": "New",
+      "id": "48W9clG"
     }
+  ],
+  "manufacturers": [
+    {
+      "id": "222",
+      "name": "Sony"
+    },
+    {
+      "id": "1234",
+      "name": "Apple"
+    }
+  ]
 }

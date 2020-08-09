@@ -1,37 +1,27 @@
 <template>
-  <div>
-    <div class="title">
-      <h1>This is Admin/New</h1>
-      <product-form 
-        @save-product="addProduct" 
-        :model="model" 
-        :manufacturers="manufacturers">
-      </product-form>
-    </div>
-  </div>
+  <product-form @save-product="addProduct" :model="model" :manufacturers="manufacturers"></product-form>
 </template>
 
 <script>
-  import ProductFrom from '@/components/product/ProductForm.vue'
+  import ProductFrom from '../../components/product/ProductForm.vue'
   export default {
     data () {
       return {
-        model: {},
-        manufacturers: [
-          {
-            _id: 'sam',
-            name: 'Samsung',
-          },
-          {
-            _id: 'apple',
-            name: 'Apple',
-          },
-        ],
+        model: {}
+      }
+    },
+    created () {
+      this.$store.dispatch('allManufacturers')
+    },
+    computed: {
+      manufacturers () {
+        return this.$store.getters.allManufacturers
       }
     },
     methods: {
       addProduct (model) {
         console.log('model', model)
+        this.$store.dispatch('addProduct', model)
       }
     },
     components: {
