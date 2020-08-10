@@ -29,7 +29,7 @@
     },
     methods: {
       updateProduct (model) {
-        console.log('model', model)
+        model.manufacturer = this.$store.getters.allManufacturers.filter(x => x.id === model.manufacturer)[0]
         this.$store.dispatch('updateProduct', model)
       }
     },

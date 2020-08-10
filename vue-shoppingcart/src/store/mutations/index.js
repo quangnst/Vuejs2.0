@@ -44,7 +44,7 @@ export const productMutations = {
     state.showLoader = false
     state.products = state.products.map(p => {
       if (p.id === payload.id) {
-        payload = { ...payload, manufacturer: state.manufacturers.filter(x => x.id === payload.manufacturer)[0] }
+        payload = { ...payload}
         return payload
       }
       return p

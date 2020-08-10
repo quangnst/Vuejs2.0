@@ -4,7 +4,10 @@
       "id": "1",
       "name": "Iphone X",
       "price": "1000",
-      "manufacturer": "222",
+      "manufacturer": {
+        "id": "1234",
+        "name": "Apple"
+      },
       "image": "https://ctmobile.vn/upload/iphone 11 purple-2.png",
       "description": "Iphone 11 64Gb"
     },
@@ -13,8 +16,8 @@
       "name": "Xperia",
       "price": "545",
       "manufacturer": {
-        "id": "1234",
-        "name": "Apple"
+        "id": "222",
+        "name": "Sony"
       },
       "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
       "description": "lorem lorem"
@@ -29,6 +32,17 @@
       "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
       "description": "New",
       "id": "48W9clG"
+    },
+    {
+      "name": "Xperia 1",
+      "price": "324324",
+      "manufacturer": {
+        "id": "222",
+        "name": "Sony"
+      },
+      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+      "description": "asds",
+      "id": "XlckM1G"
     }
   ],
   "manufacturers": [
