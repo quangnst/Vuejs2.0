@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div class="title">
-      <h1><i class="fa fa-braille"></i> In Stock</h1>
-    </div>
+  <div class="h-100 bg-white">
     <product-list></product-list>
   </div>
 </template>

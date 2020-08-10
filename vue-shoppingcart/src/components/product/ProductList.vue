@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="products">
+    <div class="products py-5">
       <div class="container">
         <div class="row">
           <template v-for="product in products">

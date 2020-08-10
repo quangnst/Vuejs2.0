@@ -1,17 +1,6 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Iphone X",
-      "price": "1000",
-      "manufacturer": {
-        "id": "1234",
-        "name": "Apple"
-      },
-      "image": "https://ctmobile.vn/upload/iphone 11 purple-2.png",
-      "description": "Iphone 11 64Gb"
-    },
-    {
       "id": "2",
       "name": "Xperia",
       "price": "545",
@@ -19,7 +8,7 @@
         "id": "222",
         "name": "Sony"
       },
-      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+      "image": "https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
       "description": "lorem lorem"
     },
     {
@@ -29,8 +18,8 @@
         "id": "1234",
         "name": "Apple"
       },
-      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
-      "description": "New",
+      "image": "https://images.pexels.com/photos/341523/pexels-photo-341523.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "description": "Customer holding the Iphone 11 Max Pro (midnight green) in their hand after phone was purchased on launch day. Manhattan, New York, USA September 20, 2019.",
       "id": "48W9clG"
     },
     {
@@ -40,7 +29,7 @@
         "id": "222",
         "name": "Sony"
       },
-      "image": "https://cdn.tgdd.vn/2020/07/campaign/HinhSanpham-364x311-3.png",
+      "image": "https://images.pexels.com/photos/2825352/pexels-photo-2825352.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       "description": "asds",
       "id": "XlckM1G"
     }

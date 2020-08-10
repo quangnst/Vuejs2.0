@@ -1,8 +1,5 @@
 <template>
-  <div v-if="cart.length > 0">
-    <div class="title">
-      <h1><i class="fa fa-superpowers"></i> Your Cart</h1>
-    </div>
+  <div v-if="cart.length > 0" class="py-5">
     <template v-for="product in cart">
       <product-details :product="product" :key="product.id" ></product-details>
     </template>
