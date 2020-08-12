@@ -1,15 +1,141 @@
 {
+  "login": [
+    {
+      "id": 1,
+      "email": "quangnst@gmail.com",
+      "password": "123456"
+    },
+    {
+      "email": "quangnst@gmail.com",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "email": "quang1@gmail.com",
+      "password": "123",
+      "id": 3
+    },
+    {
+      "email": "quangnst@gmail.com",
+      "password": "123456",
+      "id": 4
+    },
+    {
+      "email": "quangnst@gmail.com",
+      "password": "1234",
+      "id": 5
+    }
+  ],
+  "register": [
+    {
+      "id": 1,
+      "name": "quang",
+      "email": "quangnst@gmail.com",
+      "password": "12345",
+      "is_admin": true
+    },
+    {
+      "name": "quanh tam",
+      "email": "vaaa29_4_88@yahoo.com",
+      "password": "123",
+      "is_admin": null,
+      "id": 2
+    },
+    {
+      "email": "sdsds@gmail.com",
+      "password": "3434",
+      "id": 3
+    },
+    {
+      "email": "quangnst@gmail.com",
+      "password": "123456",
+      "id": 4
+    },
+    {
+      "email": "quangnst@gmail.com",
+      "password": "123456",
+      "id": 5
+    },
+    {
+      "name": "quanh tam",
+      "email": "vaaa29_4_88@yahoo.com",
+      "password": "123456",
+      "is_admin": null,
+      "id": 6
+    },
+    {
+      "name": "quanh tam",
+      "email": "dd@gmail.com",
+      "password": "123",
+      "is_admin": null,
+      "id": 7
+    },
+    {
+      "name": "ola",
+      "email": "ola@gmail.com",
+      "password": "12345",
+      "is_admin": null,
+      "id": 8
+    },
+    {
+      "name": "alo",
+      "email": "alo@gmail.com",
+      "password": "12345",
+      "is_admin": null,
+      "id": 9
+    },
+    {
+      "name": "alo1",
+      "email": "alo1@gmail.com",
+      "password": "1234",
+      "is_admin": null,
+      "id": 10
+    },
+    {
+      "name": "ppp",
+      "email": "pp@gmail.com",
+      "password": "12345",
+      "is_admin": null,
+      "id": 11
+    },
+    {
+      "name": "quanh tam",
+      "email": "dd@gmail.com",
+      "password": "123",
+      "is_admin": null,
+      "id": 12
+    },
+    {
+      "name": "quanh tam",
+      "email": "silecs123@gmail.com",
+      "password": "123",
+      "is_admin": null,
+      "id": 13
+    },
+    {
+      "name": "quanh tam",
+      "email": "silecs123@gmail.com",
+      "password": "123",
+      "is_admin": null,
+      "id": 14
+    },
+    {
+      "email": "asdasd@gmail.com",
+      "password": "12345",
+      "id": 15
+    }
+  ],
   "products": [
     {
       "id": "2",
       "name": "Xperia",
       "price": "545",
-      "manufacturer": {
-        "id": "222",
-        "name": "Sony"
-      },
       "image": "https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-      "description": "lorem lorem"
+      "description": "lorem lorem",
+      "manufacturer": {
+        "id": "1234",
+        "name": "Apple"
+      }
     },
     {
       "name": "Iphone Xmas",

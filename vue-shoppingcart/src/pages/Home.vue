@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100 bg-white">
+  <div class="min-vh-100 bg-white">
     <product-list></product-list>
   </div>
 </template>

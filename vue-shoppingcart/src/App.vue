@@ -102,6 +102,7 @@ export default {
       // Loading spinner
       return this.$store.state.showLoader;
     },
+    isLoggedIn: function(){ return this.$store.getters.isLoggedIn }
   },
 };
 </script>

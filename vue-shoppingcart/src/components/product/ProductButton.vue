@@ -6,6 +6,9 @@
     <button v-else class="button button-danger" @click="removeFromCart(product.id)">
       <i class="fa fa-trash"></i> Remove from Cart
     </button>
+    <!-- <button class="button button-danger rounded-circle ml-2">
+      <i class="fa fa-heart"></i>
+    </button> -->
   </div>
 </template>
 

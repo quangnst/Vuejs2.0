@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+/* Modules */
+import auth from './modules/auth';
 Vue.use(Vuex)
 
 import { productGetters, manufacturerGetter } from "./getters"
@@ -23,5 +25,8 @@ export default new Vuex.Store({
     },
     getters: Object.assign({}, productGetters, manufacturerGetter),
     mutations: Object.assign({}, productMutations, cartMutations, manufacturerMutations),
-    actions: Object.assign({}, productActions, manufacturerActions )
+    actions: Object.assign({}, productActions, manufacturerActions ),
+    modules: {
+        auth
+    },
 })
