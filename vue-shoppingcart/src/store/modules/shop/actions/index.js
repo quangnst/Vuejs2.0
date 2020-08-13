@@ -14,7 +14,7 @@ import {
   ALL_PRODUCTS_SUCCESS,
   ALL_MANUFACTURERS,
   ALL_MANUFACTURERS_SUCCESS
-} from "../mutation-types";
+} from "../../../mutation-types";
 
 export const productActions = {
   allProducts({ commit }) {

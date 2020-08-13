@@ -18,7 +18,7 @@ export default {
   props: ["product"],
   data() {
     return {
-      cart: this.$store.state.cart
+      cart: this.$store.getters.cart
     };
   },
   computed: {

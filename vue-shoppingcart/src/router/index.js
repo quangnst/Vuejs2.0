@@ -1,20 +1,20 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Home from '@/pages/Home';
-import Cart from '@/pages/Cart';
-import Details from '@/pages/Details';
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/views/shop/Home";
+import Cart from "@/views/shop/Cart";
+import Details from "@/views/shop/Details";
 
 import store from "@/store";
 
 // Auth
-import Login from '@/components/auth/Login.vue'
-import Register from '@/components/auth/Register.vue'
+import Login from "@/views/auth/Login.vue";
+import Register from "@/views/auth/Register.vue";
 
 // Admin
-import Index from '@/pages/admin/Index';
-import Products from '@/pages/admin/Products';
-import Edit from '@/pages/admin/Edit';
-import New from '@/pages/admin/New';
+import Index from "@/views/shop/admin/Index";
+import Products from "@/views/shop/admin/Products";
+import Edit from "@/views/shop/admin/Edit";
+import New from "@/views/shop/admin/New";
 
 Vue.use(Router);
 
@@ -112,5 +112,3 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
-
-

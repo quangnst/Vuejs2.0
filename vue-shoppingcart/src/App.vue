@@ -62,7 +62,6 @@
 
 <script>
 import toastr from "toastr";
-
 import {
   ADD_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_SUCCESS,
@@ -72,7 +71,7 @@ export default {
   name: "app",
   data() {
     return {
-      cartItems: this.$store.state.cart,
+      cartItems: this.$store.getters.cart,
     };
   },
   created() {
@@ -96,7 +95,7 @@ export default {
   computed: {
     cartItemsCount() {
       // Cart count
-      return this.cartItems.length;
+      return this.cartItems.length
     },
     showLoader() {
       // Loading spinner

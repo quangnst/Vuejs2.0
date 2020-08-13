@@ -18,6 +18,9 @@
                     <div class="py-2 text-uppercase">Quantity</div>
                   </th>
                   <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">MANUFACTURER</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
                     <div class="py-2 text-uppercase">Remove</div>
                   </th>
                 </tr>
@@ -50,6 +53,7 @@
                   <td class="border-0 align-middle">
                     <strong>${{ product.price }}</strong>
                   </td>
+                  <td class="border-0 align-middle"><strong>{{ product.manufacturer.name }}</strong></td>
                   <td class="border-0 align-middle"><strong>{{ product.manufacturer.name }}</strong></td>
                   <td class="border-0 align-middle">
                     <product-button :product="product"></product-button>

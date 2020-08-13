@@ -29,7 +29,6 @@
         </div>
         <div class="form-group">
           <label>Manufacturer</label>
-          {{model.manufacturer}}
           <select
             type="text"
             class="form-control"

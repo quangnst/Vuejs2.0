@@ -128,14 +128,14 @@
   "products": [
     {
       "id": "2",
-      "name": "Xperia",
+      "name": "Xperia av",
       "price": "545",
-      "image": "https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-      "description": "lorem lorem",
       "manufacturer": {
-        "id": "1234",
-        "name": "Apple"
-      }
+        "id": "222",
+        "name": "Sony"
+      },
+      "image": "https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "description": "lorem lorem"
     },
     {
       "name": "Iphone Xmas",
@@ -152,12 +152,23 @@
       "name": "Xperia 1",
       "price": "324324",
       "manufacturer": {
-        "id": "222",
-        "name": "Sony"
+        "id": "1234",
+        "name": "Apple"
       },
       "image": "https://images.pexels.com/photos/2825352/pexels-photo-2825352.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
       "description": "asds",
       "id": "XlckM1G"
+    },
+    {
+      "name": "Iphone Xmas",
+      "price": "4",
+      "manufacturer": {
+        "id": "1234",
+        "name": "Apple"
+      },
+      "image": "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "description": "new new",
+      "id": "FB3GPUZ"
     }
   ],
   "manufacturers": [
