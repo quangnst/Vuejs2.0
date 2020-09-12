@@ -33,25 +33,32 @@
           </v-card>
 
           <div class="extras text-right mt-5">
-            <v-btn text color="primary">Forgot Password</v-btn>
+            <v-btn text color="primary" @click="showPasswordReset = true">Forgot Password</v-btn>
             <v-btn text color="primary" @click="$router.push({ name: 'signup'})">Create an Account</v-btn>
           </div>
         </v-col>
       </v-row>
     </v-container>
+    <PasswordReset v-if="showPasswordReset" @close="togglePasswordReset()"></PasswordReset>
   </div>
 </template>
 
-
 <script>
+// import into file
+import PasswordReset from '@/components/PasswordReset'
+
 export default {
   data() {
     return {
       loginForm: {
         email: '',
         password: ''
-      }
+      },
+      showPasswordReset: false
     }
+  },
+  components: {
+    PasswordReset
   },
   methods: {
     login() {
@@ -59,6 +66,9 @@ export default {
         email: this.loginForm.email,
         password: this.loginForm.password
       })
+    },
+    togglePasswordReset() {
+      this.showPasswordReset = !this.showPasswordReset
     }
   }
 }
