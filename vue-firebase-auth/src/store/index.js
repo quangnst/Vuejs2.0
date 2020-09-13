@@ -5,13 +5,31 @@ import router from "../router/index";
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+// realtime firebase
+fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
+  let postsArray = []
+
+  snapshot.forEach(doc => {
+    let post = doc.data()
+    post.id = doc.id
+
+    postsArray.push(post)
+  })
+
+  store.commit('setPosts', postsArray)
+})
+
+const store = new Vuex.Store({
   state: {
     userProfile: {},
+    posts: [],
   },
   mutations: {
     setUserProfile(state, val) {
       state.userProfile = val;
+    },
+    setPosts(state, val) {
+      state.posts = val;
     },
   },
   actions: {
@@ -42,11 +60,11 @@ export default new Vuex.Store({
       dispatch("fetchUserProfile", user);
     },
     async logout({ commit }) {
-      await fb.auth.signOut()
+      await fb.auth.signOut();
 
       // clear userProfile and redirect to /login
-      commit('setUserProfile', {})
-      router.push('/login')
+      commit("setUserProfile", {});
+      router.push("/login");
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
@@ -60,6 +78,18 @@ export default new Vuex.Store({
         router.push("/");
       }
     },
+    async createPost({ state }, post) {
+      await fb.postsCollection.add({
+        createdOn: new Date(),
+        content: post.content,
+        userId: fb.auth.currentUser.uid,
+        userName: state.userProfile.name,
+        comments: 0,
+        likes: 0,
+      });
+    },
   },
   modules: {},
 });
+
+export default store;
