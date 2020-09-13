@@ -1,5 +1,5 @@
 <template>
   <div class="login">
-    <h1>This is an about page</h1>
+    <h1>{{$store.state.userProfile}}</h1>
   </div>
 </template>

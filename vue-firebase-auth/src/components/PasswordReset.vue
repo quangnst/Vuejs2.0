@@ -12,7 +12,7 @@
           ></v-text-field>
         </form>
         <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
-        <button @click="resetPassword()" class="button">Reset</button>
+        <v-btn @click="resetPassword()" class="button">Reset</v-btn>
       </div>
       <p v-else>Success! Check your email for a reset link.</p>
 

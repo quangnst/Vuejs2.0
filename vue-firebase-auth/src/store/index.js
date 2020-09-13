@@ -9,7 +9,11 @@ export default new Vuex.Store({
   state: {
     userProfile: {},
   },
-  mutations: {},
+  mutations: {
+    setUserProfile(state, val) {
+      state.userProfile = val;
+    },
+  },
   actions: {
     async login({ dispatch }, form) {
       // sign user in
@@ -37,6 +41,13 @@ export default new Vuex.Store({
       // fetch user profile and set in state
       dispatch("fetchUserProfile", user);
     },
+    async logout({ commit }) {
+      await fb.auth.signOut()
+
+      // clear userProfile and redirect to /login
+      commit('setUserProfile', {})
+      router.push('/login')
+    },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
       const userProfile = await fb.usersCollection.doc(user.uid).get();
@@ -45,7 +56,9 @@ export default new Vuex.Store({
       commit("setUserProfile", userProfile.data());
 
       // change route to dashboard
-      router.push("/");
+      if (router.currentRoute.path === "/login") {
+        router.push("/");
+      }
     },
   },
   modules: {},
