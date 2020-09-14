@@ -48,6 +48,15 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: "/admin",
+    name: "admin",
+    component: () =>
+      import(/* webpackChunkName: "settings" */ "../views/Admin.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({

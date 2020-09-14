@@ -32,6 +32,9 @@
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </router-link>
+    <router-link to="/admin" class="mx-2 white--text text-decoration-none">
+      Admin
+    </router-link>
     <v-btn text @click="logout()">Logout</v-btn>
   </v-app-bar>
 </template>

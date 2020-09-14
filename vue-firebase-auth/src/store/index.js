@@ -19,10 +19,25 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   store.commit('setPosts', postsArray)
 })
 
+//Get Products
+fb.productsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
+  let productsArray = [];
+
+  snapshot.forEach((doc) => {
+    let product = doc.data();
+    product.id = doc.id;
+
+    productsArray.push(product);
+  });
+
+  store.commit("setProducts", productsArray);
+});
+
 const store = new Vuex.Store({
   state: {
     userProfile: {},
     posts: [],
+    products: [],
   },
   mutations: {
     setUserProfile(state, val) {
@@ -30,6 +45,9 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val;
+    },
+    setProducts(state, val) {
+      state.products = val;
     },
   },
   actions: {
@@ -84,6 +102,19 @@ const store = new Vuex.Store({
         content: post.content,
         userId: fb.auth.currentUser.uid,
         userName: state.userProfile.name,
+        comments: 0,
+        likes: 0,
+      });
+    },
+    async createProduct({ state }, product) {
+      await fb.productsCollection.add({
+        createdOn: new Date(),
+        productName: product.name,
+        productType: product.type,
+        productPrice: product.price,
+        productImage: product.image,
+        productDesc: product.desc,
+        uploadBy: state.userProfile.name,
         comments: 0,
         likes: 0,
       });
