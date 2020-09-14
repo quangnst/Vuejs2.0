@@ -25,7 +25,7 @@
           <div v-for="post in posts" :key="post.id" class="post">
             <h5>{{ post.userName }}</h5>
             <span>{{ post.createdOn | formatDate }}</span>
-            <p>{{ post.content }}</p>
+            <p>{{ post.content | trimLength }}</p>
             <ul>
               <li>
                 <a>comments {{ post.comments }}</a>

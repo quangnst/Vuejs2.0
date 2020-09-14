@@ -1,27 +1,49 @@
 <template>
-  <v-app-bar app color="primary" dark>
-    <div class="d-flex align-center">
-      <v-btn @click="$router.push({ name: '/' })">Vue Authen</v-btn>
-    </div>
-
-    <v-spacer></v-spacer>
-
-    <v-btn @click="$router.push({ name: '/' })">Dashboard</v-btn>
-    <v-btn @click="$router.push({ name: 'settings' })">Settings</v-btn>
-    <v-btn @click="logout()">Logout</v-btn>
+  <v-app-bar
+    :clipped-left="$vuetify.breakpoint.lgAndUp"
+    app
+    color="primary"
+    dark
+  >
+    <v-toolbar-title style="width: 350px">
+      <router-link to="/">
+        <v-icon class="text-h4">mdi-shopping</v-icon>
+      </router-link>
+    </v-toolbar-title>
+    <v-text-field
+      flat
+      solo-inverted
+      hide-details
+      prepend-inner-icon="mdi-magnify"
+      label="Search"
+      class="hidden-sm-and-down pl-10 ml-4"
+    />
+    <v-spacer />
+    <v-btn icon>
+      <v-icon>mdi-account-circle</v-icon>
+    </v-btn>
+    <v-btn icon>
+      <v-badge content="2" value="2" color="green" overlap>
+        <v-icon>mdi-bell</v-icon>
+      </v-badge>
+    </v-btn>
+    <router-link to="/cart" class="mx-2">
+      <v-badge content="2" value="2" color="green" overlap>
+        <v-icon>mdi-cart</v-icon>
+      </v-badge>
+    </router-link>
+    <v-btn text @click="logout()">Logout</v-btn>
   </v-app-bar>
 </template>
 <script>
 export default {
   data() {
-    return {
-  
-    };
+    return {};
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
-    }
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>

@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Dashboard from "../views/Dashboard.vue";
+import Shop from "../views/shop/Shop.vue";
+import Product from "../views/shop/Product.vue";
+import Cart from "../views/shop/Cart.vue";
 import { auth } from "../firebase";
 
 Vue.use(VueRouter);
@@ -8,11 +10,22 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Dashboard",
-    component: Dashboard,
+    component: Shop,
+    name: "shop",
+
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/product",
+    name: "product",
+    component: Product,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
   },
   {
     path: "/login",
