@@ -92,7 +92,6 @@
           </v-card>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <v-breadcrumbs class="pb-0" :items="breadcrums"></v-breadcrumbs>
 
           <v-row dense>
             <v-col cols="12" sm="8" class="pl-6 pt-6">
@@ -135,7 +134,7 @@
                       >
                         <v-btn
                           v-if="hover"
-                          @click="$router.push({ name: 'product' })"
+                          @click="$router.push({ name: 'product', params: { productId: pro.id }})"
                           outlined
                           >VIEW</v-btn
                         >
@@ -144,7 +143,7 @@
                   </v-img>
                   <v-card-text class="text--primary">
                     <div>
-                      <v-btn text @click="$router.push({ name: 'product' })">
+                      <v-btn text @click="$router.push({ name: 'product', params: { productId: pro.id }})">
                         {{ pro.productName }}
                       </v-btn>
                     </div>
@@ -191,23 +190,6 @@ export default {
       "Price: High to Low",
     ],
     page: 1,
-    breadcrums: [
-      {
-        text: "Home",
-        disabled: false,
-        href: "breadcrumbs_home",
-      },
-      {
-        text: "Clothing",
-        disabled: false,
-        href: "breadcrumbs_clothing",
-      },
-      {
-        text: "T-Shirts",
-        disabled: true,
-        href: "breadcrumbs_shirts",
-      },
-    ],
     min: 0,
     max: 10000,
     items: [

@@ -1,23 +1,23 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 import * as fb from "../firebase";
 import router from "../router/index";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 // realtime firebase
-fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
-  let postsArray = []
+fb.postsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
+  let postsArray = [];
 
-  snapshot.forEach(doc => {
-    let post = doc.data()
-    post.id = doc.id
+  snapshot.forEach((doc) => {
+    let post = doc.data();
+    post.id = doc.id;
 
-    postsArray.push(post)
-  })
+    postsArray.push(post);
+  });
 
-  store.commit('setPosts', postsArray)
-})
+  store.commit("setPosts", postsArray);
+});
 
 //Get Products
 fb.productsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
@@ -38,6 +38,7 @@ const store = new Vuex.Store({
     userProfile: {},
     posts: [],
     products: [],
+    product: []
   },
   mutations: {
     setUserProfile(state, val) {
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
     },
     setProducts(state, val) {
       state.products = val;
+    },
+    getProductId(state, val) {
+      state.product = val;
     },
   },
   actions: {
@@ -118,6 +122,14 @@ const store = new Vuex.Store({
         comments: 0,
         likes: 0,
       });
+    },
+
+    async fetchProductById({ commit }, productId) {
+      // fetch user profile
+      const productById = await fb.productsCollection.doc(productId).get();
+
+      // set user profile in state
+      commit("getProductId", productById.data());
     },
   },
   modules: {},
