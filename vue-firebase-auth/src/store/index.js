@@ -61,7 +61,7 @@ const store = new Vuex.Store({
       state.quality = quality;
     },
     removeFromCart(state, val) {
-      const index = state.carts.findIndex((p) => p.id === val);
+      const index = state.carts.findIndex((p) => p.productId === val);
       state.carts.splice(index, 1);
     },
   },
@@ -132,6 +132,7 @@ const store = new Vuex.Store({
         uploadBy: state.userProfile.name,
         comments: 0,
         likes: 0,
+        productId: state.products.length + 1,
       });
     },
 

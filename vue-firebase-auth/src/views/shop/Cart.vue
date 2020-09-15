@@ -16,7 +16,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(cart, index) in carts" :key="cart.id">
+                <tr v-for="cart in carts" :key="cart.productId">
                   <td>
                     <v-list-item key="1">
                       <v-list-item-avatar>
@@ -45,7 +45,7 @@
                     ></v-text-field>
                   </td>
                   <td>${{ cart.productPrice * qualityItem }}</td>
-                  <td><v-btn icon @click="removeFromCart(index)">X</v-btn></td>
+                  <td><v-btn icon @click="removeFromCart(cart.productId)">X</v-btn></td>
                 </tr>
               </tbody>
             </template>
