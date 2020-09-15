@@ -301,7 +301,7 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.commit('addToCart', { product: this.product, quality: this.quality });
+      this.$store.commit('addToCart', this.product.productId);
     },
   }
 

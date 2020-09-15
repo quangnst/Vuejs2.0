@@ -28,7 +28,7 @@
       </v-badge>
     </v-btn>
     <router-link to="/cart" class="mx-2">
-      <v-badge content="2" value="2" color="green" overlap>
+      <v-badge :content="itemsInCart" color="green" overlap>
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </router-link>
@@ -42,6 +42,12 @@
 export default {
   data() {
     return {};
+  },
+  computed: {
+    itemsInCart(){
+      let cart = this.$store.getters.cartProducts;
+      return cart.reduce((accum, item) => accum + item.quantity, 0)
+    }
   },
   methods: {
     logout() {

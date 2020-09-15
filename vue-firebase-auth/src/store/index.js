@@ -40,7 +40,7 @@ const store = new Vuex.Store({
     products: [],
     product: [],
     carts: [],
-    quality: null
+    quality: null,
   },
   mutations: {
     setUserProfile(state, val) {
@@ -56,9 +56,17 @@ const store = new Vuex.Store({
       state.product = val;
     },
 
-    addToCart(state, {product, quality}) {
-      state.carts.push(product);
-      state.quality = quality;
+    addToCart(state, productId) {
+      const record = state.carts.find(p => p.productId === productId)
+      if (!record) {
+          state.carts.push({
+            productId,
+            quantity: 1,
+          });
+        } else {
+          record.quantity++;
+        }
+      
     },
     removeFromCart(state, val) {
       const index = state.carts.findIndex((p) => p.productId === val);
@@ -142,6 +150,20 @@ const store = new Vuex.Store({
 
       // set user profile in state
       commit("getProductId", productById.data());
+    },
+  },
+  getters: {
+    cartProducts: (state) => {
+      return state.carts.map(({ productId, quantity }) => {
+        const product = state.products.find((p) => p.productId === productId);
+        return {
+          id: product.productId,
+          name: product.productName,
+          price: product.productPrice,
+          image: product.productImage,
+          quantity,
+        };
+      });
     },
   },
   modules: {},

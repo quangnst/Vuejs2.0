@@ -8,7 +8,7 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-center">ITEM</th>
+                  <th class="text-left">ITEM</th>
                   <th class="text-center">PRICE</th>
                   <th class="text-center">QUANTITY</th>
                   <th class="text-center">TOTAL</th>
@@ -21,31 +21,21 @@
                     <v-list-item key="1">
                       <v-list-item-avatar>
                         <v-img
-                          :src="cart.productImage"
+                          :src="cart.image"
                         ></v-img>
                       </v-list-item-avatar>
 
                       <v-list-item-content style="max-width: 200px">
-                        <v-list-item-title>{{ cart.productName }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ cart.productDesc }}</v-list-item-subtitle>
+                        <v-list-item-title>{{ cart.name }}</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item>
                   </td>
-                  <td>${{ cart.productPrice }}</td>
-                  <td>
-                    <v-text-field
-                      class="pt-10"
-                      label="Outlined"
-                      style="width: 80px;"
-                      single-line
-                      outlined
-                      :value="qualityItem"
-                      v-model="qualityItem"
-                      type="number"
-                    ></v-text-field>
+                  <td class="text-center">${{ cart.price }}</td>
+                  <td class="text-center">
+                    {{ cart.quantity }}
                   </td>
-                  <td>${{ cart.productPrice * qualityItem }}</td>
-                  <td><v-btn icon @click="removeFromCart(cart.productId)">X</v-btn></td>
+                  <td class="text-center">${{ cart.quantity * cart.price}}</td>
+                  <td><v-btn icon @click="removeFromCart(cart.id)">X</v-btn></td>
                 </tr>
               </tbody>
             </template>
@@ -64,20 +54,20 @@
               <tbody>
                 <tr>
                   <td>Order Subtotal</td>
-                  <td class="text-right" style="width: 50px;">$160.00</td>
+                  <td class="text-right" style="width: 50px;">${{total}}</td>
                 </tr>
                 <tr>
                   <td>Shipping Charges</td>
-                  <td class="text-right" style="width: 50px;">$10.00</td>
+                  <td class="text-right" style="width: 50px;">${{shipping}}</td>
                 </tr>
                 <tr>
                   <td>Tax</td>
-                  <td class="text-right" style="width: 50px;">$5.00</td>
+                  <td class="text-right" style="width: 50px;">${{tax}}</td>
                 </tr>
                 <tr>
                   <td>Total</td>
                   <td class="text-right" style="width: 50px;">
-                    <b>$175.00</b>
+                    <b>${{total + shipping + tax}}</b>
                   </td>
                 </tr>
               </tbody>
@@ -133,35 +123,26 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     rating: 4.5,
-    breadcrums: [
-      {
-        text: "Home",
-        disabled: false,
-        href: "breadcrumbs_home",
-      },
-      {
-        text: "Clothing",
-        disabled: false,
-        href: "breadcrumbs_clothing",
-      },
-      {
-        text: "T-Shirts",
-        disabled: true,
-        href: "breadcrumbs_shirts",
-      },
-    ],
-    qualityItem: null
+    shipping: 10,
+    tax: 5
   }),
   created() {
-    this.qualityItem = this.quality
+    
   },
 
   computed: {
-    ...mapState(["carts", "quality"]),
+    ...mapGetters({
+      carts: 'cartProducts'
+    }),
+    total () {
+      return this.carts.reduce((total, p) => {
+        return total + p.price * p.quantity
+      }, 0)
+    }
   },
   methods: {
     removeFromCart(id) {
