@@ -16,7 +16,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="cart in carts" :key="cart.productId">
+                <tr v-for="cart in carts" :key="cart.id">
                   <td>
                     <v-list-item key="1">
                       <v-list-item-avatar>
@@ -67,7 +67,7 @@
                 <tr>
                   <td>Total</td>
                   <td class="text-right" style="width: 50px;">
-                    <b>${{total + shipping + tax}}</b>
+                    <b>${{total > 0 ? total + shipping + tax : 0}}</b>
                   </td>
                 </tr>
               </tbody>

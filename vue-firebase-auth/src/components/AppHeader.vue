@@ -28,7 +28,7 @@
       </v-badge>
     </v-btn>
     <router-link to="/cart" class="mx-2">
-      <v-badge :content="itemsInCart" color="green" overlap>
+      <v-badge :content="itemsInCart" :color=" itemsInCart > 0 ? 'green' : 'transparent'" overlap>
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </router-link>

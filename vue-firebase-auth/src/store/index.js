@@ -56,15 +56,15 @@ const store = new Vuex.Store({
       state.product = val;
     },
 
-    addToCart(state, productId) {
+    addToCart(state, {productId, quantity}) {
       const record = state.carts.find(p => p.productId === productId)
       if (!record) {
           state.carts.push({
             productId,
-            quantity: 1,
+            quantity: parseInt(quantity, 10),
           });
         } else {
-          record.quantity++;
+          record.quantity = record.quantity + parseInt(quantity, 10);
         }
       
     },

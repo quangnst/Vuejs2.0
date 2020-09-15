@@ -43,7 +43,7 @@
               outlined
               style="width:100px"
               :value="1"
-              v-model="quality"
+              v-model="quantity"
               dense
             ></v-text-field>
             <v-btn class="primary white--text" outlined tile dense
@@ -290,7 +290,7 @@ export default {
         },
       ],
       productId: this.$route.params.productId,
-      quality: 1
+      quantity: 1
     };
   },
   created() {
@@ -301,7 +301,7 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.commit('addToCart', this.product.productId);
+      this.$store.commit('addToCart', { productId: this.product.productId, quantity: this.quantity });
     },
   }
 
