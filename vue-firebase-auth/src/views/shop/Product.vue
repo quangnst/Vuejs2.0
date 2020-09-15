@@ -43,9 +43,11 @@
               outlined
               style="width:100px"
               :value="1"
+              v-model="quality"
               dense
             ></v-text-field>
             <v-btn class="primary white--text" outlined tile dense
+              @click="addToCart"
               ><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn
             >
             <v-btn class="ml-4" outlined tile>ADD TO WISHLIST</v-btn>
@@ -56,7 +58,6 @@
         <div class="col-sm-12 col-xs-12 col-md-12">
           <v-tabs>
             <v-tab>Description</v-tab>
-            <v-tab>Materials</v-tab>
             <v-tab>REVIEWS</v-tab>
             <v-tab-item>
               <p class="pt-10 subtitle-1 font-weight-thin">
@@ -73,26 +74,11 @@
               </p>
             </v-tab-item>
             <v-tab-item>
-              <p class="pt-10 subtitle-1 font-weight-thin">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ultricies mi eget mauris pharetra et. Vel pretium lectus quam id
-                leo in vitae turpis massa. Orci dapibus ultrices in iaculis
-                nunc. At auctor urna nunc id cursus metus. Integer feugiat
-                scelerisque varius morbi enim nunc. Aliquam sem et tortor
-                consequat id porta nibh venenatis cras. Pellentesque pulvinar
-                pellentesque habitant morbi tristique senectus et netus.
-                Malesuada nunc vel risus commodo viverra maecenas. Neque
-                volutpat ac tincidunt vitae semper quis.
-              </p>
-            </v-tab-item>
-            <v-tab-item>
-              <v-list three-line="true" avatar="true">
+              <v-list avatar="true">
                 <v-list-item-group v-model="item" color="primary">
                   <v-list-item
                     v-for="(item, i) in items"
                     :key="i"
-                    inactive="true"
                   >
                     <v-list-item-avatar>
                       <v-img :src="item.avatar"></v-img>
@@ -121,7 +107,7 @@
             </p>
             <v-divider></v-divider>
             <div class="row text-center">
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
+              <div class="col-md-3 col-sm-4 col-xs-12 text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="200">
                   <v-card :elevation="hover ? 16 : 2">
                     <v-img
@@ -145,7 +131,7 @@
                   </v-card>
                 </v-hover>
               </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
+              <div class="col-md-3 col-sm-4 col-xs-12 text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="200">
                   <v-card :elevation="hover ? 16 : 2">
                     <v-img
@@ -169,7 +155,7 @@
                   </v-card>
                 </v-hover>
               </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
+              <div class="col-md-3 col-sm-4 col-xs-12 text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="200">
                   <v-card :elevation="hover ? 16 : 2">
                     <v-img
@@ -193,7 +179,7 @@
                   </v-card>
                 </v-hover>
               </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
+              <div class="col-md-3 col-sm-4 col-xs-12 text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="200">
                   <v-card :elevation="hover ? 16 : 2">
                     <v-img
@@ -202,54 +188,6 @@
                       :src="require('../../assets/img/shop/5.jpg')"
                     >
                       <v-card-title>Shirts </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Nike, Adidas, Puma</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn class="ma-2" outlined color="info">
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
-                <v-hover v-slot:default="{ hover }" open-delay="200">
-                  <v-card :elevation="hover ? 16 : 2">
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../../assets/img/home/deal4.jpg')"
-                    >
-                      <v-card-title>Shoes </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Nike, Adidas, Puma</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn class="ma-2" outlined color="info">
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
-                <v-hover v-slot:default="{ hover }" open-delay="200">
-                  <v-card :elevation="hover ? 16 : 2">
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../../assets/img/shop/3.jpg')"
-                    >
-                      <v-card-title>Jackets </v-card-title>
                     </v-img>
 
                     <v-card-text class="text--primary text-center">
@@ -352,6 +290,7 @@ export default {
         },
       ],
       productId: this.$route.params.productId,
+      quality: 1
     };
   },
   created() {
@@ -360,5 +299,11 @@ export default {
   computed: {
     ...mapState(["product"]),
   },
+  methods: {
+    addToCart() {
+      this.$store.commit('addToCart', { product: this.product, quality: this.quality });
+    },
+  }
+
 };
 </script>

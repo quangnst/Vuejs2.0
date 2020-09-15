@@ -38,7 +38,9 @@ const store = new Vuex.Store({
     userProfile: {},
     posts: [],
     products: [],
-    product: []
+    product: [],
+    carts: [],
+    quality: null
   },
   mutations: {
     setUserProfile(state, val) {
@@ -52,6 +54,15 @@ const store = new Vuex.Store({
     },
     getProductId(state, val) {
       state.product = val;
+    },
+
+    addToCart(state, {product, quality}) {
+      state.carts.push(product);
+      state.quality = quality;
+    },
+    removeFromCart(state, val) {
+      const index = state.carts.findIndex((p) => p.id === val);
+      state.carts.splice(index, 1);
     },
   },
   actions: {
