@@ -8,7 +8,6 @@ import router from "../router/index";
 
 Vue.use(Vuex);
 
-
 // realtime firebase
 fb.postsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
   let postsArray = [];
@@ -23,20 +22,6 @@ fb.postsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
   store.commit("setPosts", postsArray);
 });
 
-//Get Products
-fb.productsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
-  let productsArray = [];
-
-  snapshot.forEach((doc) => {
-    let product = doc.data();
-    product.id = doc.id;
-
-    productsArray.push(product);
-  });
-
-  store.commit("setProducts", productsArray);
-});
-
 const store = new Vuex.Store({
   state: {
     userProfile: {},
@@ -44,7 +29,6 @@ const store = new Vuex.Store({
     products: [],
     product: [],
     carts: [],
-    productFilterItems: [],
     quality: null,
   },
   mutations: {
@@ -61,7 +45,7 @@ const store = new Vuex.Store({
       state.product = val;
     },
     getProductFilter(state, val) {
-      state.productFilterItems.push(val);
+      state.products.push(val);
     },
     addToCart(state, { product_id, quantity }) {
       const record = state.carts.find((p) => p.product_id === product_id);
@@ -149,6 +133,23 @@ const store = new Vuex.Store({
         product_id: state.products.length + 1,
       });
     },
+    async fetchAllProduct() {
+      //Get Products
+      fb.productsCollection
+        .orderBy("createdOn", "desc")
+        .onSnapshot((snapshot) => {
+          let productsArray = [];
+
+          snapshot.forEach((doc) => {
+            let product = doc.data();
+            product.id = doc.id;
+
+            productsArray.push(product);
+          });
+
+          store.commit("setProducts", productsArray);
+        });
+    },
     async fetchProductById({ commit }, product_id) {
       // fetch user profile
       const productById = await fb.productsCollection.doc(product_id).get();
@@ -156,9 +157,8 @@ const store = new Vuex.Store({
       // set user profile in state
       commit("getProductId", productById.data());
     },
-    async filterProducts({ state, commit }, {key, value}) {
-
-      state.productFilterItems = [];
+    async filterProducts({ state, commit }, { key, value }) {
+      state.products = [];
       // Create a reference to the products collection
       const db = firebase.firestore();
       const productsRef = db.collection("products");
@@ -181,7 +181,6 @@ const store = new Vuex.Store({
         .catch(function(error) {
           console.log("Error getting documents: ", error);
         });
-      
     },
   },
   getters: {

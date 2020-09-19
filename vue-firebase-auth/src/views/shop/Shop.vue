@@ -108,11 +108,11 @@
             </v-col>
           </v-row>
           <v-divider></v-divider>
-          <div class="row text-center" v-if="productsShow.length">
+          <div class="row text-center" v-if="products.length">
             <div
               class="col-md-4 col-sm-6 col-xs-12"
               :key="pro.id"
-              v-for="pro in productsShow"
+              v-for="pro in products"
             >
               <v-hover v-slot:default="{ hover }">
                 <v-card class="mx-auto" color="grey lighten-4" max-width="600">
@@ -164,7 +164,7 @@
             </div>
           </div>
 
-          <div v-else>
+          <div>
             <p class="no-results">There are currently no products</p>
           </div>
           <div class="text-center mt-12">
@@ -309,29 +309,25 @@ export default {
           src: require("../../assets/img/shop/12.jpg"),
         },
       ],
-      queryKey: 'price', // default
-      queryValue: 200, // default
-
+      
       selectionCategory: [],
-      productsShow: []
+      productsShow: this.products
     };
   },
-  mounted() {
-    this.productsShow = this.products;
-  },
   computed: {
-    ...mapState(["products","productFilterItems"]),
+    ...mapState(["products"]),
+  },
+  mounted() {
+    this.$store.dispatch('fetchAllProduct')
   },
   methods: {
     getFilterCaterogy(){
       if(this.selectionCategory.length){
         this.$store.dispatch('filterProducts', {key: "category", value: this.selectionCategory});
-        this.productsShow = this.productFilterItems
       } else {
-        this.productsShow = this.products;
+        this.$store.dispatch('fetchAllProduct')
       }
-      
-    },
+    }
   }
 };
 </script>
