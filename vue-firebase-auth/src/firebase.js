@@ -19,21 +19,6 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-// Create a reference to the products collection
-var productsRef = db.collection("products");
-
-productsRef
-  .where("price", "<", 200)
-  .get()
-  .then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, "=>", doc.data());
-    });
-  })
-  .catch(function(error) {
-    console.log("Error getting documents: ", error);
-  });
 // collection references
 const usersCollection = db.collection("users");
 const postsCollection = db.collection("posts");

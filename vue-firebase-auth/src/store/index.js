@@ -156,11 +156,13 @@ const store = new Vuex.Store({
       // set user profile in state
       commit("getProductId", productById.data());
     },
-    async filterProducts({ commit }, {key, value}) {
+    async filterProducts({ state, commit }, {key, value}) {
+
+      state.productFilterItems = [];
       // Create a reference to the products collection
       const db = firebase.firestore();
       const productsRef = db.collection("products");
-      let operator = "";
+      let operator = "in";
       if (key == "price") {
         operator = "<";
       }
@@ -171,7 +173,9 @@ const store = new Vuex.Store({
           querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, "=>", doc.data());
-            commit("getProductFilter", {id: doc.id, data: doc.data()});
+            let post = doc.data();
+            post.id = doc.id;
+            commit("getProductFilter", post);
           });
         })
         .catch(function(error) {

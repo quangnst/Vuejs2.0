@@ -9,12 +9,12 @@
             <template>
               <v-treeview
                 :items="items"
-                :open="[1]"
-                :active="[5]"
-                :selected-color="'#fff'"
-                activatable
-                open-on-click
+                v-model="selectionCategory"
+                @input="getFilterCaterogy"
+                selectable
                 dense
+                open-all
+                item-key="name"
               ></v-treeview>
             </template>
             <v-divider></v-divider>
@@ -107,13 +107,12 @@
               ></v-select>
             </v-col>
           </v-row>
-
           <v-divider></v-divider>
-          <div class="row text-center" v-if="productFilterItems.length">
+          <div class="row text-center" v-if="productsShow.length">
             <div
               class="col-md-4 col-sm-6 col-xs-12"
               :key="pro.id"
-              v-for="pro in productFilterItems"
+              v-for="pro in productsShow"
             >
               <v-hover v-slot:default="{ hover }">
                 <v-card class="mx-auto" color="grey lighten-4" max-width="600">
@@ -121,9 +120,9 @@
                     class="white--text align-end"
                     :aspect-ratio="16 / 9"
                     height="200px"
-                    :src="pro.data.image"
+                    :src="pro.image"
                   >
-                    <v-card-title>{{ pro.data.type }}</v-card-title>
+                    <v-card-title>{{ pro.type }}</v-card-title>
                     <v-expand-transition>
                       <div
                         v-if="hover"
@@ -155,10 +154,10 @@
                           })
                         "
                       >
-                        {{ pro.data.name }}
+                        {{ pro.name }}
                       </v-btn>
                     </div>
-                    <div>${{ pro.data.price }}</div>
+                    <div>${{ pro.price }}</div>
                   </v-card-text>
                 </v-card>
               </v-hover>
@@ -208,7 +207,7 @@ export default {
           id: 2,
           name: "Shoes",
           children: [
-            { id: 2, name: "Casuals" },
+            { id: 2, name: "Casuals", },
             { id: 3, name: "Formals" },
             { id: 4, name: "Sneakers" },
           ],
@@ -311,20 +310,28 @@ export default {
         },
       ],
       queryKey: 'price', // default
-      queryValue: 50 // default
+      queryValue: 200, // default
+
+      selectionCategory: [],
+      productsShow: []
     };
   },
-  created() {
-    this.getFilter();
+  mounted() {
+    this.productsShow = this.products;
   },
   computed: {
     ...mapState(["products","productFilterItems"]),
   },
   methods: {
-    getFilter(){
-      this.$store.state.productFilterItems = [];
-      this.$store.dispatch('filterProducts', {key: this.queryKey, value: this.queryValue});
-    }
+    getFilterCaterogy(){
+      if(this.selectionCategory.length){
+        this.$store.dispatch('filterProducts', {key: "category", value: this.selectionCategory});
+        this.productsShow = this.productFilterItems
+      } else {
+        this.productsShow = this.products;
+      }
+      
+    },
   }
 };
 </script>
