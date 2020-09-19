@@ -61,9 +61,8 @@ const store = new Vuex.Store({
       state.product = val;
     },
     getProductFilter(state, val) {
-      state.productFilterItems = val;
+      state.productFilterItems.push(val);
     },
-
     addToCart(state, { product_id, quantity }) {
       const record = state.carts.find((p) => p.product_id === product_id);
       if (!record) {
@@ -157,19 +156,22 @@ const store = new Vuex.Store({
       // set user profile in state
       commit("getProductId", productById.data());
     },
-    async filterProducts({ commit }, value) {
+    async filterProducts({ commit }, {key, value}) {
       // Create a reference to the products collection
       const db = firebase.firestore();
       const productsRef = db.collection("products");
-
+      let operator = "";
+      if (key == "price") {
+        operator = "<";
+      }
       productsRef
-        .where(value, ">=", 2)
+        .where(key, operator, value)
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, "=>", doc.data());
-            commit("getProductFilter", doc.data());
+            commit("getProductFilter", {id: doc.id, data: doc.data()});
           });
         })
         .catch(function(error) {

@@ -92,7 +92,6 @@
           </v-card>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          {{productFilterItems}}
           <v-row dense>
             <v-col cols="12" sm="8" class="pl-6 pt-6">
               <small>Showing 1-12 of 200 products</small>
@@ -110,12 +109,11 @@
           </v-row>
 
           <v-divider></v-divider>
-
-          <div class="row text-center" v-if="products.length">
+          <div class="row text-center" v-if="productFilterItems.length">
             <div
               class="col-md-4 col-sm-6 col-xs-12"
               :key="pro.id"
-              v-for="pro in products"
+              v-for="pro in productFilterItems"
             >
               <v-hover v-slot:default="{ hover }">
                 <v-card class="mx-auto" color="grey lighten-4" max-width="600">
@@ -123,9 +121,9 @@
                     class="white--text align-end"
                     :aspect-ratio="16 / 9"
                     height="200px"
-                    :src="pro.image"
+                    :src="pro.data.image"
                   >
-                    <v-card-title>{{ pro.type }} </v-card-title>
+                    <v-card-title>{{ pro.data.type }}</v-card-title>
                     <v-expand-transition>
                       <div
                         v-if="hover"
@@ -157,10 +155,10 @@
                           })
                         "
                       >
-                        {{ pro.name }}
+                        {{ pro.data.name }}
                       </v-btn>
                     </div>
-                    <div>${{ pro.price }}</div>
+                    <div>${{ pro.data.price }}</div>
                   </v-card-text>
                 </v-card>
               </v-hover>
@@ -312,6 +310,8 @@ export default {
           src: require("../../assets/img/shop/12.jpg"),
         },
       ],
+      queryKey: 'price', // default
+      queryValue: 50 // default
     };
   },
   created() {
@@ -322,7 +322,8 @@ export default {
   },
   methods: {
     getFilter(){
-      this.$store.dispatch('filterProducts', 'price');
+      this.$store.state.productFilterItems = [];
+      this.$store.dispatch('filterProducts', {key: this.queryKey, value: this.queryValue});
     }
   }
 };
