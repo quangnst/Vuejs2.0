@@ -56,17 +56,16 @@ const store = new Vuex.Store({
       state.product = val;
     },
 
-    addToCart(state, {productId, quantity}) {
-      const record = state.carts.find(p => p.productId === productId)
+    addToCart(state, { productId, quantity }) {
+      const record = state.carts.find((p) => p.productId === productId);
       if (!record) {
-          state.carts.push({
-            productId,
-            quantity: parseInt(quantity, 10),
-          });
-        } else {
-          record.quantity = record.quantity + parseInt(quantity, 10);
-        }
-      
+        state.carts.push({
+          productId,
+          quantity: parseInt(quantity, 10),
+        });
+      } else {
+        record.quantity = record.quantity + parseInt(quantity, 10);
+      }
     },
     removeFromCart(state, val) {
       const index = state.carts.findIndex((p) => p.productId === val);
@@ -132,10 +131,10 @@ const store = new Vuex.Store({
     async createProduct({ state }, product) {
       await fb.productsCollection.add({
         createdOn: new Date(),
-        productName: product.name,
-        productType: product.type,
-        productPrice: product.price,
-        productImage: product.image,
+        name: product.name,
+        type: product.type,
+        price: product.price,
+        image: product.image,
         productDesc: product.desc,
         uploadBy: state.userProfile.name,
         comments: 0,
@@ -158,9 +157,9 @@ const store = new Vuex.Store({
         const product = state.products.find((p) => p.productId === productId);
         return {
           id: product.productId,
-          name: product.productName,
-          price: product.productPrice,
-          image: product.productImage,
+          name: product.name,
+          price: product.price,
+          image: product.image,
           quantity,
         };
       });

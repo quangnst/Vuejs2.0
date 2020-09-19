@@ -4,18 +4,18 @@
       <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-12">
           <v-carousel>
-            <v-carousel-item :src="product.productImage"> </v-carousel-item>
-            <v-carousel-item :src="product.productImage"> </v-carousel-item>
-            <v-carousel-item :src="product.productImage"> </v-carousel-item>
-            <v-carousel-item :src="product.productImage"> </v-carousel-item>
+            <v-carousel-item :src="product.image"> </v-carousel-item>
+            <v-carousel-item :src="product.image"> </v-carousel-item>
+            <v-carousel-item :src="product.image"> </v-carousel-item>
+            <v-carousel-item :src="product.image"> </v-carousel-item>
           </v-carousel>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-12">
           <div class="pl-6">
-            <p class="display-1 mb-0">{{ product.productName }}</p>
+            <p class="display-1 mb-0">{{ product.name }}</p>
             <v-card-actions class="pa-0">
               <p class="headline font-weight-light pt-3">
-                ${{ product.productPrice }}
+                ${{ product.price }}
               </p>
               <v-spacer></v-spacer>
               <v-rating
@@ -46,7 +46,11 @@
               v-model="quantity"
               dense
             ></v-text-field>
-            <v-btn class="primary white--text" outlined tile dense
+            <v-btn
+              class="primary white--text"
+              outlined
+              tile
+              dense
               @click="addToCart"
               ><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn
             >
@@ -76,10 +80,7 @@
             <v-tab-item>
               <v-list avatar="true">
                 <v-list-item-group v-model="item" color="primary">
-                  <v-list-item
-                    v-for="(item, i) in items"
-                    :key="i"
-                  >
+                  <v-list-item v-for="(item, i) in items" :key="i">
                     <v-list-item-avatar>
                       <v-img :src="item.avatar"></v-img>
                     </v-list-item-avatar>
@@ -290,7 +291,7 @@ export default {
         },
       ],
       productId: this.$route.params.productId,
-      quantity: 1
+      quantity: 1,
     };
   },
   created() {
@@ -301,9 +302,11 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.commit('addToCart', { productId: this.product.productId, quantity: this.quantity });
+      this.$store.commit("addToCart", {
+        productId: this.product.productId,
+        quantity: this.quantity,
+      });
     },
-  }
-
+  },
 };
 </script>

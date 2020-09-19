@@ -92,7 +92,6 @@
           </v-card>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
-
           <v-row dense>
             <v-col cols="12" sm="8" class="pl-6 pt-6">
               <small>Showing 1-12 of 200 products</small>
@@ -123,9 +122,9 @@
                     class="white--text align-end"
                     :aspect-ratio="16 / 9"
                     height="200px"
-                    :src="pro.productImage"
+                    :src="pro.image"
                   >
-                    <v-card-title>{{ pro.productType }} </v-card-title>
+                    <v-card-title>{{ pro.type }} </v-card-title>
                     <v-expand-transition>
                       <div
                         v-if="hover"
@@ -134,7 +133,12 @@
                       >
                         <v-btn
                           v-if="hover"
-                          @click="$router.push({ name: 'product', params: { productId: pro.id }})"
+                          @click="
+                            $router.push({
+                              name: 'product',
+                              params: { productId: pro.id },
+                            })
+                          "
                           outlined
                           >VIEW</v-btn
                         >
@@ -143,11 +147,19 @@
                   </v-img>
                   <v-card-text class="text--primary">
                     <div>
-                      <v-btn text @click="$router.push({ name: 'product', params: { productId: pro.id }})">
-                        {{ pro.productName }}
+                      <v-btn
+                        text
+                        @click="
+                          $router.push({
+                            name: 'product',
+                            params: { productId: pro.id },
+                          })
+                        "
+                      >
+                        {{ pro.name }}
                       </v-btn>
                     </div>
-                    <div>${{ pro.productPrice }}</div>
+                    <div>${{ pro.price }}</div>
                   </v-card-text>
                 </v-card>
               </v-hover>
@@ -180,126 +192,126 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-    range: [0, 10000],
-    select: "Popularity",
-    options: [
-      "Default",
-      "Popularity",
-      "Relevance",
-      "Price: Low to High",
-      "Price: High to Low",
-    ],
-    page: 1,
-    min: 0,
-    max: 10000,
-    items: [
-      {
-        id: 2,
-        name: "Shoes",
-        children: [
-          { id: 2, name: "Casuals" },
-          { id: 3, name: "Formals" },
-          { id: 4, name: "Sneakers" },
-        ],
-      },
-      {
-        id: 1,
-        name: "Clothing",
-        children: [
-          { id: 5, name: "Shirts" },
-          { id: 6, name: "Tops" },
-          { id: 7, name: "Tunics" },
-          { id: 8, name: "Bodysuit" },
-        ],
-      },
-    ],
-    productsOld: [
-      {
-        id: 1,
-        name: "BLACK TEE",
-        type: "Jackets",
-        price: "18.00",
-        src: require("../../assets/img/shop/1.jpg"),
-      },
-      {
-        id: 2,
-        name: "WHITE TEE",
-        type: "Polo",
-        price: "40.00",
-        src: require("../../assets/img/shop/2.jpg"),
-      },
-      {
-        id: 3,
-        name: "Zara limited...",
-        type: "Denim",
-        price: "25.00",
-        src: require("../../assets/img/shop/3.jpg"),
-      },
-      {
-        id: 4,
-        name: "SKULL TEE",
-        type: "Jackets",
-        price: "30.00",
-        src: require("../../assets/img/shop/4.jpg"),
-      },
-      {
-        id: 5,
-        name: "MANGO WINTER",
-        type: "Sweaters",
-        price: "50.00",
-        src: require("../../assets/img/shop/5.jpg"),
-      },
-      {
-        id: 6,
-        name: "SHIRT",
-        type: "Denim",
-        price: "34.00",
-        src: require("../../assets/img/shop/6.jpg"),
-      },
-      {
-        id: 7,
-        name: "TRUCKER JACKET",
-        type: "Jackets",
-        price: "38.00",
-        src: require("../../assets/img/shop/7.jpg"),
-      },
-      {
-        id: 8,
-        name: "COATS",
-        type: "Jackets",
-        price: "25.00",
-        src: require("../../assets/img/shop/8.jpg"),
-      },
-      {
-        id: 9,
-        name: "MANGO WINTER",
-        type: "Sweaters",
-        price: "50.00",
-        src: require("../../assets/img/shop/9.jpg"),
-      },
-      {
-        id: 10,
-        name: "SHIRT",
-        type: "Denim",
-        price: "34.00",
-        src: require("../../assets/img/shop/10.jpg"),
-      },
-      {
-        id: 11,
-        name: "TRUCKER JACKET",
-        type: "Jackets",
-        price: "38.00",
-        src: require("../../assets/img/shop/11.jpg"),
-      },
-      {
-        id: 12,
-        name: "COATS",
-        type: "Jackets",
-        price: "25.00",
-        src: require("../../assets/img/shop/12.jpg"),
-      },
-    ],
-    }
+      range: [0, 10000],
+      select: "Popularity",
+      options: [
+        "Default",
+        "Popularity",
+        "Relevance",
+        "Price: Low to High",
+        "Price: High to Low",
+      ],
+      page: 1,
+      min: 0,
+      max: 10000,
+      items: [
+        {
+          id: 2,
+          name: "Shoes",
+          children: [
+            { id: 2, name: "Casuals" },
+            { id: 3, name: "Formals" },
+            { id: 4, name: "Sneakers" },
+          ],
+        },
+        {
+          id: 1,
+          name: "Clothing",
+          children: [
+            { id: 5, name: "Shirts" },
+            { id: 6, name: "Tops" },
+            { id: 7, name: "Tunics" },
+            { id: 8, name: "Bodysuit" },
+          ],
+        },
+      ],
+      productsOld: [
+        {
+          id: 1,
+          name: "BLACK TEE",
+          type: "Jackets",
+          price: "18.00",
+          src: require("../../assets/img/shop/1.jpg"),
+        },
+        {
+          id: 2,
+          name: "WHITE TEE",
+          type: "Polo",
+          price: "40.00",
+          src: require("../../assets/img/shop/2.jpg"),
+        },
+        {
+          id: 3,
+          name: "Zara limited...",
+          type: "Denim",
+          price: "25.00",
+          src: require("../../assets/img/shop/3.jpg"),
+        },
+        {
+          id: 4,
+          name: "SKULL TEE",
+          type: "Jackets",
+          price: "30.00",
+          src: require("../../assets/img/shop/4.jpg"),
+        },
+        {
+          id: 5,
+          name: "MANGO WINTER",
+          type: "Sweaters",
+          price: "50.00",
+          src: require("../../assets/img/shop/5.jpg"),
+        },
+        {
+          id: 6,
+          name: "SHIRT",
+          type: "Denim",
+          price: "34.00",
+          src: require("../../assets/img/shop/6.jpg"),
+        },
+        {
+          id: 7,
+          name: "TRUCKER JACKET",
+          type: "Jackets",
+          price: "38.00",
+          src: require("../../assets/img/shop/7.jpg"),
+        },
+        {
+          id: 8,
+          name: "COATS",
+          type: "Jackets",
+          price: "25.00",
+          src: require("../../assets/img/shop/8.jpg"),
+        },
+        {
+          id: 9,
+          name: "MANGO WINTER",
+          type: "Sweaters",
+          price: "50.00",
+          src: require("../../assets/img/shop/9.jpg"),
+        },
+        {
+          id: 10,
+          name: "SHIRT",
+          type: "Denim",
+          price: "34.00",
+          src: require("../../assets/img/shop/10.jpg"),
+        },
+        {
+          id: 11,
+          name: "TRUCKER JACKET",
+          type: "Jackets",
+          price: "38.00",
+          src: require("../../assets/img/shop/11.jpg"),
+        },
+        {
+          id: 12,
+          name: "COATS",
+          type: "Jackets",
+          price: "25.00",
+          src: require("../../assets/img/shop/12.jpg"),
+        },
+      ],
+    };
   },
 
   computed: {
