@@ -10,14 +10,14 @@
         <v-icon class="text-h4">mdi-shopping</v-icon>
       </router-link>
     </v-toolbar-title>
-    <v-text-field
+    <!-- <v-text-field
       flat
       solo-inverted
       hide-details
       prepend-inner-icon="mdi-magnify"
       label="Search"
       class="hidden-sm-and-down pl-10 ml-4"
-    />
+    /> -->
     <v-spacer />
     <v-btn icon>
       <v-icon>mdi-account-circle</v-icon>

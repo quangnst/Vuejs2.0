@@ -290,12 +290,12 @@ export default {
             "<span class='text--primary'>Britta Holt</span> &mdash; Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         },
       ],
-      productId: this.$route.params.productId,
+      product_id: this.$route.params.product_id,
       quantity: 1,
     };
   },
   created() {
-    this.$store.dispatch("fetchProductById", this.productId);
+    this.$store.dispatch("fetchProductById", this.product_id);
   },
   computed: {
     ...mapState(["product"]),
@@ -303,7 +303,7 @@ export default {
   methods: {
     addToCart() {
       this.$store.commit("addToCart", {
-        productId: this.product.productId,
+        product_id: this.product.product_id,
         quantity: this.quantity,
       });
     },

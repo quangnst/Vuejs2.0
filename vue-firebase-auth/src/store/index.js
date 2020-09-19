@@ -56,11 +56,11 @@ const store = new Vuex.Store({
       state.product = val;
     },
 
-    addToCart(state, { productId, quantity }) {
-      const record = state.carts.find((p) => p.productId === productId);
+    addToCart(state, { product_id, quantity }) {
+      const record = state.carts.find((p) => p.product_id === product_id);
       if (!record) {
         state.carts.push({
-          productId,
+          product_id,
           quantity: parseInt(quantity, 10),
         });
       } else {
@@ -68,7 +68,7 @@ const store = new Vuex.Store({
       }
     },
     removeFromCart(state, val) {
-      const index = state.carts.findIndex((p) => p.productId === val);
+      const index = state.carts.findIndex((p) => p.product_id === val);
       state.carts.splice(index, 1);
     },
   },
@@ -139,13 +139,13 @@ const store = new Vuex.Store({
         uploadBy: state.userProfile.name,
         comments: 0,
         likes: 0,
-        productId: state.products.length + 1,
+        product_id: state.products.length + 1,
       });
     },
 
-    async fetchProductById({ commit }, productId) {
+    async fetchProductById({ commit }, product_id) {
       // fetch user profile
-      const productById = await fb.productsCollection.doc(productId).get();
+      const productById = await fb.productsCollection.doc(product_id).get();
 
       // set user profile in state
       commit("getProductId", productById.data());
@@ -153,10 +153,10 @@ const store = new Vuex.Store({
   },
   getters: {
     cartProducts: (state) => {
-      return state.carts.map(({ productId, quantity }) => {
-        const product = state.products.find((p) => p.productId === productId);
+      return state.carts.map(({ product_id, quantity }) => {
+        const product = state.products.find((p) => p.product_id === product_id);
         return {
-          id: product.productId,
+          product_id: product.product_id,
           name: product.name,
           price: product.price,
           image: product.image,

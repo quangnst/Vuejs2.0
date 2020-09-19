@@ -136,7 +136,7 @@
                           @click="
                             $router.push({
                               name: 'product',
-                              params: { productId: pro.id },
+                              params: { product_id: pro.id },
                             })
                           "
                           outlined
@@ -152,7 +152,7 @@
                         @click="
                           $router.push({
                             name: 'product',
-                            params: { productId: pro.id },
+                            params: { product_id: pro.id },
                           })
                         "
                       >
@@ -192,7 +192,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      range: [0, 10000],
+      range: [0, 1000],
       select: "Popularity",
       options: [
         "Default",
@@ -203,7 +203,7 @@ export default {
       ],
       page: 1,
       min: 0,
-      max: 10000,
+      max: 1000,
       items: [
         {
           id: 2,
