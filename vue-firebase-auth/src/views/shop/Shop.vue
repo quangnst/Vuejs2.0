@@ -92,6 +92,7 @@
           </v-card>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
+          {{productFilterItems}}
           <v-row dense>
             <v-col cols="12" sm="8" class="pl-6 pt-6">
               <small>Showing 1-12 of 200 products</small>
@@ -313,9 +314,16 @@ export default {
       ],
     };
   },
-
-  computed: {
-    ...mapState(["products"]),
+  created() {
+    this.getFilter();
   },
+  computed: {
+    ...mapState(["products","productFilterItems"]),
+  },
+  methods: {
+    getFilter(){
+      this.$store.dispatch('filterProducts', 'price');
+    }
+  }
 };
 </script>

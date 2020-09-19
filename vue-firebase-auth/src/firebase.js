@@ -23,7 +23,7 @@ const auth = firebase.auth();
 var productsRef = db.collection("products");
 
 productsRef
-  .where("price", ">=", 2)
+  .where("price", "<", 200)
   .get()
   .then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
