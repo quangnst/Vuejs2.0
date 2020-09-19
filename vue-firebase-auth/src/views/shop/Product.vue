@@ -19,7 +19,7 @@
               </p>
               <v-spacer></v-spacer>
               <v-rating
-                v-model="rating"
+                v-model="product.rate"
                 class=""
                 background-color="warning lighten-3"
                 color="warning"

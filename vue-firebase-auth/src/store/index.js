@@ -133,22 +133,23 @@ const store = new Vuex.Store({
         product_id: state.products.length + 1,
       });
     },
-    async fetchAllProduct() {
+    async fetchAllProduct({commit},orderSorting = 1) {
       //Get Products
+      let productsArray = [];
       fb.productsCollection
         .orderBy("createdOn", "desc")
         .onSnapshot((snapshot) => {
-          let productsArray = [];
-
           snapshot.forEach((doc) => {
             let product = doc.data();
             product.id = doc.id;
-
-            productsArray.push(product);
+            if (orderSorting > 1) {
+              productsArray.push(product);
+            } else {
+              productsArray.unshift(product);
+            }
           });
-
-          store.commit("setProducts", productsArray);
         });
+        commit("setProducts", productsArray);
     },
     async fetchProductById({ commit }, product_id) {
       // fetch user profile

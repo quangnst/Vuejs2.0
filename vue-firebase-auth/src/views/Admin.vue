@@ -29,14 +29,14 @@
 
                     <v-col cols="12">
                       <ValidationProvider
-                        name="Product Type"
+                        name="Product Category"
                         rules="required|min:3"
                         v-slot="{ errors }"
                       >
                         <v-text-field
-                          v-model="product.type"
-                          label="Product Type"
-                          placeholder="Jackets"
+                          v-model="product.category"
+                          label="Product Category"
+                          placeholder="Casuals"
                         ></v-text-field>
                         <span class="red--text subtitle-2">{{
                           errors[0]
@@ -110,7 +110,12 @@
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider, localize, extend } from "vee-validate";
+import {
+  ValidationObserver,
+  ValidationProvider,
+  localize,
+  extend,
+} from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 
 // install rules and localization
@@ -120,10 +125,10 @@ Object.keys(rules).forEach((rule) => {
 localize({
   en: {
     messages: {
-      required: 'This field is required',
-      min: 'This field must have no less than {length} characters'
-    }
-  }
+      required: "This field is required",
+      min: "This field must have no less than {length} characters",
+    },
+  },
 });
 
 export default {
@@ -131,10 +136,11 @@ export default {
     return {
       product: {
         name: "",
-        type: "",
+        category: "",
         price: "",
         desc: "",
         image: "",
+        rate: 0
       },
       rules: {
         required: (value) => !!value || "Required.",
@@ -149,10 +155,11 @@ export default {
     createProduct() {
       this.$store.dispatch("createProduct", {
         name: this.product.name,
-        type: this.product.type,
+        category: this.product.category,
         price: this.product.price,
         desc: this.product.desc,
         image: this.product.image,
+        rate: this.product.rate
       });
     },
   },

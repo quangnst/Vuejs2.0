@@ -78,17 +78,6 @@
                 dense
               ></v-checkbox>
             </v-container>
-            <v-divider></v-divider>
-            <v-card-title class="pb-0">Size</v-card-title>
-            <v-container class="pt-0" fluid>
-              <v-checkbox label="XS" hide-details dense></v-checkbox>
-              <v-checkbox label="S" hide-details dense></v-checkbox>
-              <v-checkbox label="M" hide-details dense></v-checkbox>
-              <v-checkbox label="L" hide-details dense></v-checkbox>
-              <v-checkbox label="XL" hide-details dense></v-checkbox>
-              <v-checkbox label="XXL" hide-details dense></v-checkbox>
-              <v-checkbox label="XXXL" hide-details dense></v-checkbox>
-            </v-container>
           </v-card>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -99,10 +88,14 @@
             <v-col cols="12" sm="4">
               <v-select
                 class="pa-0"
-                v-model="select"
+                v-model="selectOrder"
+                item-text="state"
+                item-value="value"
+                @change="orderSorting"
                 :items="options"
+                return-object
                 style="margin-bottom: -20px;"
-                outlined
+                outline
                 dense
               ></v-select>
             </v-col>
@@ -122,7 +115,7 @@
                     height="200px"
                     :src="pro.image"
                   >
-                    <v-card-title>{{ pro.type }}</v-card-title>
+                    <v-card-title>{{ pro.category }}</v-card-title>
                     <v-expand-transition>
                       <div
                         v-if="hover"
@@ -191,13 +184,10 @@ export default {
   data() {
     return {
       range: [0, 1000],
-      select: "Popularity",
+      selectOrder: 1,
       options: [
-        "Default",
-        "Popularity",
-        "Relevance",
-        "Price: Low to High",
-        "Price: High to Low",
+        { state: "Price: Low to High", value: 1 },
+        { state: "Price: High to Low", value: 2 },
       ],
       page: 1,
       min: 0,
@@ -207,7 +197,7 @@ export default {
           id: 2,
           name: "Shoes",
           children: [
-            { id: 2, name: "Casuals", },
+            { id: 2, name: "Casuals" },
             { id: 3, name: "Formals" },
             { id: 4, name: "Sneakers" },
           ],
@@ -309,25 +299,32 @@ export default {
           src: require("../../assets/img/shop/12.jpg"),
         },
       ],
-      
+
       selectionCategory: [],
-      productsShow: this.products
+      productsShow: this.products,
     };
   },
   computed: {
     ...mapState(["products"]),
   },
   mounted() {
-    this.$store.dispatch('fetchAllProduct')
+    this.$store.dispatch("fetchAllProduct");
   },
   methods: {
-    getFilterCaterogy(){
-      if(this.selectionCategory.length){
-        this.$store.dispatch('filterProducts', {key: "category", value: this.selectionCategory});
+    getFilterCaterogy() {
+      if (this.selectionCategory.length) {
+        this.$store.dispatch("filterProducts", {
+          key: "category",
+          value: this.selectionCategory,
+        });
       } else {
-        this.$store.dispatch('fetchAllProduct')
+        this.$store.dispatch("fetchAllProduct");
       }
-    }
-  }
+    },
+    orderSorting() {
+      console.log(this.selectOrder.value);
+      this.$store.dispatch("fetchAllProduct", this.selectOrder.value);
+    },
+  },
 };
 </script>
