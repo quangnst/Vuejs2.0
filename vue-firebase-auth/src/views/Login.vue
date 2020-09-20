@@ -1,75 +1,188 @@
 <template>
-  <div id="login" class="d-flex align-center fill-height">
+  <v-app id="auth">
     <v-container class="fill-height" fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="6">
-          <v-card class="elevation-12">
-            <v-toolbar color="primary" dark flat>
-              <v-toolbar-title>Login form</v-toolbar-title>
-            </v-toolbar>
+      <v-layout
+        align-center
+        justify-end
+        class="mx-auto "
+        style="max-width: 1200px"
+      >
+        <v-flex class="login-form">
+          <v-card light="light">
             <v-card-text>
-              <v-form>
-                <v-text-field
-                  label="Email"
-                  name="email"
-                  prepend-icon="mdi-account"
-                  type="email"
-                  v-model.trim="loginForm.email"
-                ></v-text-field>
-
-                <v-text-field
-                  label="Password"
-                  name="password"
-                  prepend-icon="mdi-lock"
-                  type="password"
-                  v-model.trim="loginForm.password"
-                ></v-text-field>
+              <div class="my-2 text-center">
+                <img
+                  src="../assets/img/logo.webp"
+                  style="max-width: 88px"
+                  class="mx-auto"
+                />
+              </div>
+              <v-form class="pb-6 pb-sm-8">
+                <Validation-observer ref="form" tag="form" v-slot="{ invalid }">
+                  <ValidationProvider
+                    name="Email"
+                    rules="required|email"
+                    v-slot="{ errors }"
+                  >
+                    <v-text-field
+                      v-model.trim="loginForm.email"
+                      light
+                      outlined
+                      large
+                      rounded
+                      hide-details="auto"
+                      append-icon="mdi-account"
+                      label="Email"
+                    ></v-text-field>
+                    <span class="red--text subtitle-2">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                  <ValidationProvider
+                    name="Password"
+                    rules="required|min:8"
+                    v-slot="{ errors }"
+                  >
+                    <v-text-field
+                      v-model.trim="loginForm.password"
+                      light
+                      outlined
+                      large
+                      rounded
+                      hide-details="auto"
+                      append-icon="mdi-lock"
+                      label="Password"
+                      type="password"
+                      class="mt-4"
+                    ></v-text-field>
+                    <span class="red--text subtitle-2">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                  <p
+                    v-if="errorsAuth"
+                    class="red--text text-center subtitle-2 mt-2 mb-0"
+                  >
+                    {{ errorsAuth }}
+                  </p>
+                  <div class="text-center">
+                    <v-btn
+                      x-large
+                      @click="login"
+                      :disabled="invalid"
+                      rounded
+                      text
+                      class="btn-cyan text-h5 white--text px-12 mt-8 text-capitalize"
+                      >Login</v-btn
+                    >
+                  </div>
+                </Validation-observer>
               </v-form>
             </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" @click="login()">Login</v-btn>
-            </v-card-actions>
           </v-card>
 
           <div class="extras text-right mt-5">
-            <v-btn text color="primary" @click="showPasswordReset = true">Forgot Password</v-btn>
-            <v-btn text color="primary" @click="$router.push({ name: 'signup'})">Create an Account</v-btn>
+            <v-btn text @click="showPasswordReset = true"
+              >Forgot Password</v-btn
+            >
+            <v-btn text @click="$router.push({ name: 'signup' })"
+              >Create an Account</v-btn
+            >
           </div>
-        </v-col>
-      </v-row>
+        </v-flex>
+      </v-layout>
+      <PasswordReset
+        v-if="showPasswordReset"
+        @close="togglePasswordReset()"
+      ></PasswordReset>
     </v-container>
-    <PasswordReset v-if="showPasswordReset" @close="togglePasswordReset()"></PasswordReset>
-  </div>
+  </v-app>
 </template>
 
 <script>
+import {
+  ValidationProvider,
+  ValidationObserver,
+  localize,
+  extend,
+} from "vee-validate";
+import * as rules from "vee-validate/dist/rules";
 // import into file
-import PasswordReset from '@/components/PasswordReset'
+import PasswordReset from "@/components/PasswordReset";
+
+// install rules and localization
+Object.keys(rules).forEach((rule) => {
+  extend(rule, rules[rule]);
+});
+localize({
+  en: {
+    messages: {
+      required: "This field is required",
+      min: "This field must have no less than {length} characters",
+    },
+  },
+});
 
 export default {
   data() {
     return {
       loginForm: {
-        email: '',
-        password: ''
+        email: "",
+        password: "",
       },
-      showPasswordReset: false
-    }
+      showPasswordReset: false,
+      togglePass: false,
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
+      errorsAuth: null,
+    };
   },
   components: {
-    PasswordReset
+    PasswordReset,
+    ValidationProvider,
+    ValidationObserver,
   },
   methods: {
     login() {
-      this.$store.dispatch('login', {
-        email: this.loginForm.email,
-        password: this.loginForm.password
-      })
+      this.$store
+        .dispatch("login", {
+          email: this.loginForm.email,
+          password: this.loginForm.password,
+        })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+            this.errorsAuth = "User or password not correct";
+          }
+        );
     },
     togglePasswordReset() {
-      this.showPasswordReset = !this.showPasswordReset
-    }
-  }
-}
+      this.showPasswordReset = !this.showPasswordReset;
+    },
+  },
+};
 </script>
+
+<style>
+.login-form {
+  max-width: 500px;
+}
+.btn-cyan {
+  background: #79dae0;
+}
+#auth {
+  background: url("../assets/img/bg.jpg") no-repeat;
+  background-size: cover;
+}
+#auth .v-card {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 69px #00000029;
+  border-radius: 30px;
+}
+.v-text-field .v-input__slot fieldset {
+  color: #79dae0;
+}
+#auth .v-btn {
+  color: rgb(50 110 113);
+}
+</style>

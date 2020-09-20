@@ -19,6 +19,9 @@
       class="hidden-sm-and-down pl-10 ml-4"
     /> -->
     <v-spacer />
+    <router-link to="/admin" class="mx-2 white--text text-decoration-none">
+      Admin
+    </router-link>
     <v-btn icon>
       <v-icon>mdi-account-circle</v-icon>
     </v-btn>
@@ -27,15 +30,12 @@
         <v-icon>mdi-bell</v-icon>
       </v-badge>
     </v-btn>
-    <router-link to="/cart" class="mx-2">
+    <router-link text to="/cart" class="mr-1 ml-4">
       <v-badge :content="itemsInCart" :color=" itemsInCart > 0 ? 'green' : 'transparent'" overlap>
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </router-link>
-    <router-link to="/admin" class="mx-2 white--text text-decoration-none">
-      Admin
-    </router-link>
-    <v-btn text @click="logout()">Logout</v-btn>
+    <v-btn text @click="logout()"><v-icon>mdi-logout</v-icon></v-btn>
   </v-app-bar>
 </template>
 <script>

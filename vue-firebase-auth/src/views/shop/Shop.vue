@@ -322,7 +322,6 @@ export default {
       }
     },
     orderSorting() {
-      console.log(this.selectOrder.value);
       this.$store.dispatch("fetchAllProduct", this.selectOrder.value);
     },
   },
