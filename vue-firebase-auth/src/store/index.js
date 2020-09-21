@@ -29,7 +29,7 @@ const store = new Vuex.Store({
     products: [],
     product: [],
     carts: [],
-    quality: null,
+    isLoading: false,
   },
   mutations: {
     setUserProfile(state, val) {
@@ -133,7 +133,7 @@ const store = new Vuex.Store({
         product_id: state.products.length + 1,
       });
     },
-    async fetchAllProduct({commit},orderSorting = 1) {
+    async fetchAllProduct({ commit }, orderSorting = 1) {
       //Get Products
       let productsArray = [];
       fb.productsCollection
@@ -148,8 +148,8 @@ const store = new Vuex.Store({
               productsArray.unshift(product);
             }
           });
-        });
-        commit("setProducts", productsArray);
+        })
+      commit("setProducts", productsArray);
     },
     async fetchProductById({ commit }, product_id) {
       // fetch user profile
@@ -158,17 +158,16 @@ const store = new Vuex.Store({
       // set user profile in state
       commit("getProductId", productById.data());
     },
-    async filterProducts({ state, commit }, { key, value }) {
+    async filterProducts({ state, commit }, { category, priceMin, priceMax }) {
+      state.isLoading = true;
       state.products = [];
       // Create a reference to the products collection
       const db = firebase.firestore();
       const productsRef = db.collection("products");
-      let operator = "in";
-      if (key == "price") {
-        operator = "<";
-      }
       productsRef
-        .where(key, operator, value)
+        .where("category", "in", category)
+        .where("price", ">", priceMin)
+        .where("price", "<", priceMax)
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -178,8 +177,10 @@ const store = new Vuex.Store({
             post.id = doc.id;
             commit("getProductFilter", post);
           });
+          state.isLoading = false;
         })
         .catch(function(error) {
+          state.isLoading = false;
           console.log("Error getting documents: ", error);
         });
     },

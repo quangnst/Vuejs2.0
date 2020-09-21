@@ -87,8 +87,8 @@
                       :disabled="invalid"
                       rounded
                       text
-                      class="btn-cyan text-h5 white--text px-12 mt-8 text-capitalize"
-                      >Sign Up</v-btn
+                      class="btn-cyan text-h5 white--text px-12 mt-8"
+                      >Sign up</v-btn
                     >
                   </div>
                 </Validation-observer>
@@ -98,7 +98,7 @@
 
           <div class="extras text-right mt-5">
             <v-btn text @click="$router.push({ name: 'login' })"
-              >Back to Login</v-btn
+              >Back to login</v-btn
             >
           </div>
         </v-flex>

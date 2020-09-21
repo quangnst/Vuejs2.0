@@ -66,9 +66,10 @@
                       x-large
                       @click="login"
                       :disabled="invalid"
+                      :loading="loadingButton"
                       rounded
                       text
-                      class="btn-cyan text-h5 white--text px-12 mt-8 text-capitalize"
+                      class="btn-cyan text-h5 white--text px-12 mt-8"
                       >Login</v-btn
                     >
                   </div>
@@ -132,6 +133,7 @@ export default {
         required: (value) => !!value || "Required.",
       },
       errorsAuth: null,
+      loadingButton: false
     };
   },
   components: {
@@ -141,6 +143,7 @@ export default {
   },
   methods: {
     login() {
+      this.loadingButton = true;
       this.$store
         .dispatch("login", {
           email: this.loginForm.email,
@@ -149,10 +152,12 @@ export default {
         .then(
           (response) => {
             console.log(response);
+            this.loadingButton = false;
           },
           (error) => {
             console.log(error);
-            this.errorsAuth = "User or password not correct";
+            this.errorsAuth = "Email or password not correct";
+            this.loadingButton = false;
           }
         );
     },
@@ -162,27 +167,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.login-form {
-  max-width: 500px;
-}
-.btn-cyan {
-  background: #79dae0;
-}
-#auth {
-  background: url("../assets/img/bg.jpg") no-repeat;
-  background-size: cover;
-}
-#auth .v-card {
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 0px 69px #00000029;
-  border-radius: 30px;
-}
-.v-text-field .v-input__slot fieldset {
-  color: #79dae0;
-}
-#auth .v-btn {
-  color: rgb(50 110 113);
-}
-</style>
