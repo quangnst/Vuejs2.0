@@ -25,13 +25,22 @@ fb.postsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
 const store = new Vuex.Store({
   state: {
     userProfile: {},
+    userId: null,
     posts: [],
     products: [],
     product: [],
     carts: [],
     isLoading: false,
+    snackbar: {
+      text: "",
+      color: "",
+      timeout: "",
+    },
   },
   mutations: {
+    setUserId(state, val) {
+      state.userId = val;
+    },
     setUserProfile(state, val) {
       state.userProfile = val;
     },
@@ -62,6 +71,11 @@ const store = new Vuex.Store({
       const index = state.carts.findIndex((p) => p.product_id === val);
       state.carts.splice(index, 1);
     },
+    showMessage(state, payload) {
+      state.snackbar.text = payload.text;
+      state.snackbar.color = payload.color;
+      state.snackbar.timeout = payload.timeout;
+    },
   },
   actions: {
     async login({ dispatch }, form) {
@@ -84,12 +98,14 @@ const store = new Vuex.Store({
       // create user profile object in userCollections
       await fb.usersCollection.doc(user.uid).set({
         name: form.name,
-        title: form.title,
+        location: form.location,
       });
 
       // fetch user profile and set in state
       dispatch("fetchUserProfile", user);
+      router.push("/");
     },
+
     async logout({ commit }) {
       await fb.auth.signOut();
 
@@ -102,12 +118,36 @@ const store = new Vuex.Store({
       const userProfile = await fb.usersCollection.doc(user.uid).get();
 
       // set user profile in state
+      commit("setUserId", user.uid);
       commit("setUserProfile", userProfile.data());
 
       // change route to dashboard
       if (router.currentRoute.path === "/login") {
         router.push("/");
       }
+    },
+
+    async updateProfile({ state, dispatch }, userUpdate) {
+      // create user profile object in userCollections
+      await fb.usersCollection
+        .doc(state.userId)
+        .update({
+          name: userUpdate.name,
+          location: userUpdate.location,
+          avatar: userUpdate.avatar,
+          phone: userUpdate.phone,
+        })
+        .then(function() {
+          dispatch("showSnack", {
+            text: "Successfully Saved!",
+            color: "success",
+            timeout: 3500,
+          });
+          console.log("aa");
+        })
+        .catch(function(error) {
+          console.log("Data could not be saved." + error);
+        });
     },
     async createPost({ state }, post) {
       await fb.postsCollection.add({
@@ -148,7 +188,7 @@ const store = new Vuex.Store({
               productsArray.unshift(product);
             }
           });
-        })
+        });
       commit("setProducts", productsArray);
     },
     async fetchProductById({ commit }, product_id) {
@@ -183,6 +223,9 @@ const store = new Vuex.Store({
           state.isLoading = false;
           console.log("Error getting documents: ", error);
         });
+    },
+    showSnack({ commit }, payload) {
+      commit("showMessage", payload);
     },
   },
   getters: {

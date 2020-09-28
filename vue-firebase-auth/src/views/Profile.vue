@@ -1,7 +1,6 @@
 <template>
   <div class="profilePage">
     <v-container class="pt-8">
-      {{userProfile}}
       <v-row>
         <v-col>
           <div>
@@ -25,122 +24,34 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="12">
-          <div class="d-flex justify-space-between">
-            <div class="flex-grow-1">
-              <v-row>
-                <v-col class="pt-0">
-                  <v-slide-x-transition>
-                    <div v-if="avatar && saved == false">
-                      <v-btn
-                        class="primary"
-                        depressed
-                        small
-                        @click="uploadImage"
-                        :loading="saving"
-                        >Save Avatar</v-btn
-                      >
-                    </div>
-                  </v-slide-x-transition>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" :md="3">
-                  <strong>Full Name</strong>
-                </v-col>
-                <v-col cols="12" :md="7">
-                  <div v-if="modifyProfile == false">{{ userProfile.name}}</div>
-                  <div v-else>
-                    <v-text-field
-                      label="Prenom"
-                      solo
-                      type="text"
-                      name="prenom"
-                      hide-details="auto"
-                    ></v-text-field>
-                  </div>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" :md="3">
-                  <strong>Date of Birth</strong>
-                </v-col>
-                <v-col cols="12" :md="7">
-                  <div v-if="modifyProfile == false">30/09/1987</div>
-                  <div v-else>
-                    <v-text-field
-                      label="Date de naissance"
-                      solo
-                      type="text"
-                      name="date"
-                      hide-details="auto"
-                    ></v-text-field>
-                  </div>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" :md="3">
-                  <strong>Telephone</strong>
-                </v-col>
-                <v-col cols="12" :md="7">
-                  <div v-if="modifyProfile == false">0123456789</div>
-                  <div v-else>
-                    <v-text-field
-                      label="0123456789"
-                      solo
-                      type="text"
-                      name="date"
-                      hide-details="auto"
-                    ></v-text-field>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
-            <v-btn
-              text
-              color="accent"
-              class="text-none"
-              @click.stop="toggleModifyProfile"
-              >Modifier</v-btn
-            >
-          </div>
-        </v-col>
-      </v-row>
+      <edit-profile :userProfile= user />
     </v-container>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import EditProfile from '@/components/user/EditProfile';
+
 export default {
   name: "Profile",
-  components: {},
+  components: {
+    EditProfile
+  },
   data() {
     return {
-      modifyProfile: false,
-
-      avatar: null,
-      saving: false,
-      saved: false,
-
-      //
       imageData: null,
       picture: null,
-      uploadValue: 0,
-
+      uploadValue: 0
 
     };
   },
   computed: {
-    userProfile() {
+    user() {
       return this.$store.state.userProfile
     }
   },
   methods: {
-    toggleModifyProfile: function() {
-      this.modifyProfile = !this.modifyProfile;
-    },
     previewImage(event) {
       this.uploadValue = 0;
       this.picture = null;
@@ -168,7 +79,7 @@ export default {
           });
         }
       );
-    },
+    }
   },
 };
 </script>

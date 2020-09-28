@@ -38,6 +38,24 @@
                     <span class="red--text subtitle-2">{{ errors[0] }}</span>
                   </ValidationProvider>
                   <ValidationProvider
+                    name="User Name"
+                    rules="required|min:3"
+                    v-slot="{ errors }"
+                  >
+                    <v-text-field
+                      v-model.trim="signupForm.location"
+                      light
+                      outlined
+                      large
+                      rounded
+                      hide-details="auto"
+                      append-icon="mdi-map-marker"
+                      label="Location"
+                      class="mt-4"
+                    ></v-text-field>
+                    <span class="red--text subtitle-2">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                  <ValidationProvider
                     name="Email"
                     rules="required|email"
                     v-slot="{ errors }"
@@ -136,6 +154,7 @@ export default {
         name: "",
         email: "",
         password: "",
+        location: ""
       },
       errorsAuth: "",
     };
@@ -151,6 +170,7 @@ export default {
           email: this.signupForm.email,
           password: this.signupForm.password,
           name: this.signupForm.name,
+          location: this.signupForm.location
         })
         .then(
           (response) => {
