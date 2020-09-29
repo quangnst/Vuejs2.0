@@ -4,22 +4,6 @@
       <div class="d-flex justify-space-between">
         <div class="flex-grow-1">
           <v-row>
-            <v-col class="pt-0">
-              <v-slide-x-transition>
-                <div v-if="avatar && saved == false">
-                  <v-btn
-                    class="primary"
-                    depressed
-                    small
-                    @click="uploadImage"
-                    :loading="saving"
-                    >Save Avatar</v-btn
-                  >
-                </div>
-              </v-slide-x-transition>
-            </v-col>
-          </v-row>
-          <v-row>
             <v-col cols="12" :md="3">
               <strong>Full Name</strong>
             </v-col>
@@ -100,9 +84,7 @@ export default {
   data() {
     return {
       modifyProfile: false,
-      avatar: null,
       saving: false,
-      saved: false,
     };
   },
   computed: {},
@@ -114,7 +96,6 @@ export default {
       const userUpdate = {
         name: this.userProfile.name,
         location: this.userProfile.location,
-        avatar: this.userProfile.image ? this.userProfile.image : "",
         phone: this.userProfile.telephone ? this.userProfile.telephone : "",
       };
       this.$store.dispatch("updateProfile", userUpdate);

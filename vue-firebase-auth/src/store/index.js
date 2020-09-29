@@ -126,7 +126,24 @@ const store = new Vuex.Store({
         router.push("/");
       }
     },
-
+    async updateProfileAvatar({ state, dispatch }, avatar) {
+      // create user profile object in userCollections
+      await fb.usersCollection
+        .doc(state.userId)
+        .update({
+          avatar: avatar,
+        })
+        .then(function() {
+          dispatch("showSnack", {
+            text: "Successfully Updated Avatar!",
+            color: "success",
+            timeout: 3500,
+          });
+        })
+        .catch(function(error) {
+          console.log("Data could not be saved." + error);
+        });
+    },
     async updateProfile({ state, dispatch }, userUpdate) {
       // create user profile object in userCollections
       await fb.usersCollection
@@ -134,7 +151,6 @@ const store = new Vuex.Store({
         .update({
           name: userUpdate.name,
           location: userUpdate.location,
-          avatar: userUpdate.avatar,
           phone: userUpdate.phone,
         })
         .then(function() {
