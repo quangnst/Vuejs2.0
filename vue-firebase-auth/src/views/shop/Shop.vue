@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container fluid>
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12">
           <v-card outlined>
@@ -55,9 +55,6 @@
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <v-row dense>
-            <v-col cols="12" sm="8" class="pl-6 pt-6">
-              <small>Showing 1-12 of 200 products</small>
-            </v-col>
             <v-col cols="12" sm="4">
               <v-select
                 class="pa-0"
@@ -67,13 +64,11 @@
                 @change="orderSorting"
                 :items="options"
                 return-object
-                style="margin-bottom: -20px;"
                 outline
                 dense
               ></v-select>
             </v-col>
           </v-row>
-          <v-divider></v-divider>
           <div class="row text-center">
             <template v-if="$store.state.isLoading">
               <div
@@ -99,11 +94,12 @@
                     class="mx-auto"
                     color="grey lighten-4"
                     max-width="600"
+                    elevation="0"
                   >
                     <v-img
                       class="white--text align-end"
                       :aspect-ratio="16 / 9"
-                      height="200px"
+                      height="300px"
                       :src="pro.image"
                     >
                       <v-card-title>{{ pro.category }}</v-card-title>
@@ -148,9 +144,6 @@
               </div>
             </template>
           </div>
-          <div class="text-center mt-12">
-            <v-pagination v-model="page" :length="6"></v-pagination>
-          </div>
         </div>
       </div>
     </v-container>
@@ -178,7 +171,6 @@ export default {
         { state: "Price: Low to High", value: 1 },
         { state: "Price: High to Low", value: 2 },
       ],
-      page: 1,
       min: 0,
       max: 200,
       items: [

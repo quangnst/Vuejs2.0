@@ -9,7 +9,7 @@
       >
         <v-flex class="login-form">
           <v-card light="light">
-            <v-card-text>
+            <v-card-text class="px-6">
               <div class="my-2 text-center">
                 <img
                   src="../assets/img/logo.webp"

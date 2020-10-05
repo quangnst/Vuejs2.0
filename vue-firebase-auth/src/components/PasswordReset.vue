@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="diaglog" persistent max-width="520">
-    <v-card class="px-4 py-6">
+    <v-card class="px-4 px-md-8 py-6">
       <v-card-title class="headline pl-0 pt-2">Reset Password</v-card-title>
       <div v-if="!showSuccess">
         <p>Enter your email to reset your password</p>

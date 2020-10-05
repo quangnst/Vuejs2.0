@@ -2,21 +2,26 @@
   <v-app-bar
     :clipped-left="$vuetify.breakpoint.lgAndUp"
     app
-    color="primary"
-    dark
+    color="white"
+    light
+    height="70"
   >
-    <v-toolbar-title style="width: 350px">
+    <v-toolbar-title>
       <router-link to="/">
-        <v-icon class="text-h4">mdi-shopping</v-icon>
+        <v-img src="../assets/img/logo.png" width="100"/>
       </router-link>
     </v-toolbar-title>
     <v-spacer />
-    <router-link to="/admin" class="mx-2 white--text text-decoration-none">
+    <router-link to="/" class="mx-4 text-decoration-none">
+      Shop
+    </router-link>
+    <router-link to="/admin" class="mx-4 text-decoration-none">
       Admin
     </router-link>
-    <router-link text to="/profile" class="mr-1 ml-4">
-      <v-icon>mdi-account-circle</v-icon>
+    <router-link text to="/profile" class="mx-4 text-decoration-none">
+      My Account
     </router-link>
+    <v-spacer />
     <v-btn icon>
       <v-badge content="2" value="2" color="green" overlap>
         <v-icon>mdi-bell</v-icon>
