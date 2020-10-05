@@ -10,11 +10,11 @@
           accept="image/*"
         />
       </div>
-      <div @click="$refs.inputRef.click()">
-        <v-avatar size="120" v-if="picture != ''">
-          <img :src="$store.state.userProfile.avatar" />
+      <div @click="$refs.inputRef.click()" style="cursor: pointer" class="d-inline">
+        <v-avatar size="120" v-if="userProfile.avatar != ''">
+          <img :src="picture == null ? userProfile.avatar : picture" />
         </v-avatar>
-        <v-avatar v-else size="60">
+        <v-avatar v-else size="120">
           <v-icon size="120">mdi-account-circle</v-icon>
         </v-avatar>
       </div>
@@ -31,11 +31,11 @@ export default {
   data() {
     return {
       imageData: null,
-      picture: this.$store.state.userProfile.avatar
+      picture: null
     };
   },
   computed: {
-   
+  
   },
   methods: {
     onUpload(event) {
@@ -47,14 +47,11 @@ export default {
       storageRef.on(`state_changed`, () => {
         storageRef.snapshot.ref.getDownloadURL().then((url) => {
           this.picture = url;
-          this.$store.dispatch("updateProfileAvatar", this.picture)
-          console.log(this.picture);
+          this.$store.dispatch("updateProfileAvatar", this.picture);
         });
       });
     },
   },
-  watch: {
-  
-  }
+  watch: {},
 };
 </script>

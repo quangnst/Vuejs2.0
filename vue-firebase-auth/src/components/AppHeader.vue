@@ -23,12 +23,12 @@
     </router-link>
     <v-spacer />
     <v-btn icon>
-      <v-badge content="2" value="2" color="green" overlap>
+      <v-badge content="2" value="2" color="primary" overlap>
         <v-icon>mdi-bell</v-icon>
       </v-badge>
     </v-btn>
     <router-link text to="/cart" class="mr-1 ml-4">
-      <v-badge :content="itemsInCart" :color=" itemsInCart > 0 ? 'green' : 'transparent'" overlap>
+      <v-badge :content="itemsInCart" :color=" itemsInCart > 0 ? 'primary' : 'transparent'" overlap>
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </router-link>

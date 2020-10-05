@@ -159,7 +159,6 @@ const store = new Vuex.Store({
             color: "success",
             timeout: 3500,
           });
-          console.log("aa");
         })
         .catch(function(error) {
           console.log("Data could not be saved." + error);
@@ -256,7 +255,7 @@ const store = new Vuex.Store({
           quantity,
         };
       });
-    },
+    }
   },
   modules: {},
 });

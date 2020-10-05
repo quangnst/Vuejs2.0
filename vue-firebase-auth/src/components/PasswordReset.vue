@@ -16,10 +16,9 @@
             light
             outlined
             large
-            rounded
             hide-details="auto"
             append-icon="mdi-account"
-            class="mt-4"
+            class="mt-4 rounded-0"
           ></v-text-field>
           <p v-if="errorMsg !== ''" class="red--text pt-0">{{ errorMsg }}</p>
         </v-form>
@@ -28,9 +27,8 @@
           <v-btn
             x-large
             @click="resetPassword"
-            rounded
             text
-            class="btn-cyan text-h5 white--text px-12 mt-2 text-capitalize"
+            class="primary text-h6 white--text px-12 mt-2 text-capitalize rounded-0"
             >Reset</v-btn
           >
         </div>

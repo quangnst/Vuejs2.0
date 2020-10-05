@@ -8,16 +8,16 @@
         style="max-width: 1200px"
       >
         <v-flex class="login-form">
-          <v-card light="light">
-            <v-card-text class="px-6">
+          <v-card light="light" class="rounded-0">
+            <v-card-text class="pa-8">
               <div class="my-2 text-center">
                 <img
-                  src="../assets/img/logo.webp"
-                  style="max-width: 88px"
+                  src="../assets/img/logo.png"
+                  width="180"
                   class="mx-auto"
                 />
               </div>
-              <v-form class="pb-6 pb-sm-8">
+              <v-form class="pb-4">
                 <Validation-observer ref="form" tag="form" v-slot="{ invalid }">
                   <ValidationProvider
                     name="Email"
@@ -29,10 +29,10 @@
                       light
                       outlined
                       large
-                      rounded
                       hide-details="auto"
                       append-icon="mdi-account"
                       label="Email"
+                      class="rounded-0"
                     ></v-text-field>
                     <span class="red--text subtitle-2">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -46,12 +46,11 @@
                       light
                       outlined
                       large
-                      rounded
                       hide-details="auto"
                       append-icon="mdi-lock"
                       label="Password"
                       type="password"
-                      class="mt-4"
+                      class="mt-4 rounded-0"
                     ></v-text-field>
                     <span class="red--text subtitle-2">{{ errors[0] }}</span>
                   </ValidationProvider>
@@ -67,9 +66,8 @@
                       @click="login"
                       :disabled="invalid"
                       :loading="loadingButton"
-                      rounded
                       text
-                      class="btn-cyan text-h5 white--text px-12 mt-8"
+                      class="primary text-h6 white--text px-12 mt-8 text-capitalize rounded-0"
                       >Login</v-btn
                     >
                   </div>

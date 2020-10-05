@@ -26,6 +26,7 @@
               :height="10"
               class="align-center"
               dense
+              color="primary"
               @click="getFilterCaterogy"
             ></v-range-slider>
             <v-row class="pa-2" dense>
@@ -64,8 +65,7 @@
                 @change="orderSorting"
                 :items="options"
                 return-object
-                outline
-                dense
+                hide-details="auto"
               ></v-select>
             </v-col>
           </v-row>
@@ -91,7 +91,7 @@
               >
                 <v-hover v-slot:default="{ hover }">
                   <v-card
-                    class="mx-auto"
+                    class="mx-auto rounded-0"
                     color="grey lighten-4"
                     max-width="600"
                     elevation="0"
